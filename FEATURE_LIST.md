@@ -50,6 +50,8 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Readiness checker for manifest, viewport, offline, installability, focus, safe-area, color, orientation, and device-input issues.
 - Accessibility Audit panel for language, title, alt text, labels, focus styles, keyboard support, reduced motion, landmarks, headings, touch targets, and contrast reminders.
 - Exportable accessibility reports with manual assistive testing checklists.
+- Privacy and Permissions inspector for camera, microphone, location, notifications, clipboard, storage, Bluetooth, USB, contacts, payments, credentials, sensors, downloads, sharing, and network calls.
+- Exportable privacy reports with permission evidence, recommendations, and manual review checklists.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.

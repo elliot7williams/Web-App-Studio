@@ -36,6 +36,8 @@
 		1A2B3C4D5E6F7000000001FB /* AccessibilityChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000128 /* AccessibilityChecker.swift */; };
 		1A2B3C4D5E6F7000000001FC /* AccessibilityReportExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000129 /* AccessibilityReportExporter.swift */; };
 		1A2B3C4D5E6F7000000001FD /* GeniusEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000130 /* GeniusEngine.swift */; };
+		1A2B3C4D5E6F7000000001FE /* PrivacyPermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000131 /* PrivacyPermissionChecker.swift */; };
+		1A2B3C4D5E6F7000000001FF /* PrivacyPermissionReportExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000132 /* PrivacyPermissionReportExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		1A2B3C4D5E6F700000000128 /* AccessibilityChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityChecker.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000129 /* AccessibilityReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityReportExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000130 /* GeniusEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusEngine.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000131 /* PrivacyPermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPermissionChecker.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000132 /* PrivacyPermissionReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPermissionReportExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,8 @@
 				1A2B3C4D5E6F700000000128 /* AccessibilityChecker.swift */,
 				1A2B3C4D5E6F700000000129 /* AccessibilityReportExporter.swift */,
 				1A2B3C4D5E6F700000000130 /* GeniusEngine.swift */,
+				1A2B3C4D5E6F700000000131 /* PrivacyPermissionChecker.swift */,
+				1A2B3C4D5E6F700000000132 /* PrivacyPermissionReportExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -233,6 +239,8 @@
 				1A2B3C4D5E6F7000000001FB /* AccessibilityChecker.swift in Sources */,
 				1A2B3C4D5E6F7000000001FC /* AccessibilityReportExporter.swift in Sources */,
 				1A2B3C4D5E6F7000000001FD /* GeniusEngine.swift in Sources */,
+				1A2B3C4D5E6F7000000001FE /* PrivacyPermissionChecker.swift in Sources */,
+				1A2B3C4D5E6F7000000001FF /* PrivacyPermissionReportExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

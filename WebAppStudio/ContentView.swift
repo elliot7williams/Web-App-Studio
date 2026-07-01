@@ -9,6 +9,7 @@ struct ContentView: View {
     @State private var isShowingDeviceMatrix = false
     @State private var isShowingReadiness = false
     @State private var isShowingAccessibility = false
+    @State private var isShowingPrivacy = false
     @State private var isShowingPerformance = false
     @State private var isShowingDeploy = false
     @State private var isShowingPublish = false
@@ -93,6 +94,12 @@ struct ContentView: View {
                     }
 
                     Button {
+                        isShowingPrivacy = true
+                    } label: {
+                        Label("Privacy", systemImage: "hand.raised")
+                    }
+
+                    Button {
                         isShowingPerformance = true
                     } label: {
                         Label("Budget", systemImage: "speedometer")
@@ -167,6 +174,10 @@ struct ContentView: View {
             }
             .sheet(isPresented: $isShowingAccessibility) {
                 AccessibilityPanel(isPresented: $isShowingAccessibility)
+                    .environmentObject(document)
+            }
+            .sheet(isPresented: $isShowingPrivacy) {
+                PrivacyPermissionPanel(isPresented: $isShowingPrivacy)
                     .environmentObject(document)
             }
             .sheet(isPresented: $isShowingPerformance) {
@@ -381,6 +392,10 @@ private struct Sidebar: View {
                 AccessibilitySummary()
             }
 
+            Section("Privacy") {
+                PrivacyPermissionSummary()
+            }
+
             Section("Performance") {
                 PerformanceSummary()
             }
@@ -559,6 +574,12 @@ private struct Sidebar: View {
                     AccessibilityReportExporter.export(document: document)
                 } label: {
                     Label("Export Accessibility Report", systemImage: "accessibility")
+                }
+
+                Button {
+                    PrivacyPermissionReportExporter.export(document: document)
+                } label: {
+                    Label("Export Privacy Report", systemImage: "hand.raised")
                 }
 
                 Button {
@@ -835,6 +856,45 @@ private struct AccessibilitySummary: View {
         if score >= 85 { return .green }
         if score >= 65 { return .orange }
         return .red
+    }
+}
+
+private struct PrivacyPermissionSummary: View {
+    @EnvironmentObject private var document: WebAppDocument
+
+    private var findings: [PrivacyPermissionFinding] {
+        PrivacyPermissionChecker.findings(for: document)
+    }
+
+    var body: some View {
+        let counts = PrivacyPermissionChecker.counts(for: findings)
+        let risk = PrivacyPermissionChecker.riskLabel(for: findings)
+
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Label(risk, systemImage: "hand.raised")
+                    .font(.headline)
+                    .foregroundStyle(riskColor(risk))
+
+                Spacer()
+
+                Text("\(counts.high) high  \(counts.review) review")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Text("\(findings.count) capability item\(findings.count == 1 ? "" : "s") detected")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private func riskColor(_ risk: String) -> Color {
+        switch risk {
+        case "High": return .red
+        case "Review": return .orange
+        default: return .green
+        }
     }
 }
 
@@ -1754,6 +1814,130 @@ private struct AccessibilityFindingRow: View {
         case .fix: return .red
         case .review: return .orange
         case .improve: return .green
+        }
+    }
+}
+
+private struct PrivacyPermissionPanel: View {
+    @EnvironmentObject private var document: WebAppDocument
+    @Binding var isPresented: Bool
+
+    private var findings: [PrivacyPermissionFinding] {
+        PrivacyPermissionChecker.findings(for: document)
+    }
+
+    var body: some View {
+        let counts = PrivacyPermissionChecker.counts(for: findings)
+        let risk = PrivacyPermissionChecker.riskLabel(for: findings)
+
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Privacy and Permissions")
+                        .font(.title2.weight(.semibold))
+                    Text("Detect browser capabilities that may trigger prompts, policy review, or device-specific fallbacks.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+                    PrivacyPermissionReportExporter.export(document: document)
+                } label: {
+                    Label("Export Report", systemImage: "square.and.arrow.up")
+                }
+
+                Button {
+                    isPresented = false
+                } label: {
+                    Label("Close", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .padding(20)
+
+            Divider()
+
+            HStack(spacing: 12) {
+                ReadinessMetric(title: "Risk", value: risk, color: riskColor(risk))
+                ReadinessMetric(title: "High", value: "\(counts.high)", color: .red)
+                ReadinessMetric(title: "Review", value: "\(counts.review)", color: .orange)
+                ReadinessMetric(title: "Low", value: "\(counts.low)", color: .green)
+            }
+            .padding(20)
+
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 10) {
+                    ForEach(findings) { finding in
+                        PrivacyPermissionFindingRow(finding: finding)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+            }
+        }
+        .frame(minWidth: 780, minHeight: 560)
+    }
+
+    private func riskColor(_ risk: String) -> Color {
+        switch risk {
+        case "High": return .red
+        case "Review": return .orange
+        default: return .green
+        }
+    }
+}
+
+private struct PrivacyPermissionFindingRow: View {
+    let finding: PrivacyPermissionFinding
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: finding.level.systemImage)
+                .foregroundStyle(color)
+                .frame(width: 24)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(finding.capability)
+                    .font(.headline)
+                Text(finding.detail)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(finding.recommendation)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if !finding.evidence.isEmpty {
+                    Text("Evidence: \(finding.evidence.joined(separator: ", "))")
+                        .font(.caption.monospaced())
+                        .foregroundStyle(.tertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            Spacer()
+
+            Text(finding.level.rawValue)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(color)
+        }
+        .padding(14)
+        .background(Color(nsColor: .controlBackgroundColor))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(nsColor: .separatorColor))
+        }
+    }
+
+    private var color: Color {
+        switch finding.level {
+        case .high: return .red
+        case .review: return .orange
+        case .low: return .green
         }
     }
 }

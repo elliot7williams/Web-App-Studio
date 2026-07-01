@@ -11,11 +11,16 @@ enum GeniusEngine {
 
         var suggestions: [GeniusSuggestion] = []
         let accessibilityFindings = AccessibilityChecker.findings(for: document)
+        let privacyFindings = PrivacyPermissionChecker.findings(for: document)
         let readinessFindings = ReadinessChecker.findings(for: document)
         let performance = PerformanceBudgetChecker.report(for: document)
 
         if accessibilityFindings.contains(where: { $0.severity == .fix }) {
             suggestions.append(.init(signal: "accessibility", title: "Run an accessibility pass", detail: "This project has accessibility fixes waiting. Export a report before sharing.", actionTitle: "Open Accessibility", priority: 95))
+        }
+
+        if privacyFindings.contains(where: { $0.level == .high }) {
+            suggestions.append(.init(signal: "privacy", title: "Review sensitive capabilities", detail: "This project appears to use APIs that can trigger permission prompts or policy review.", actionTitle: "Open Privacy", priority: 92))
         }
 
         if readinessFindings.contains(where: { $0.severity == .error }) {
