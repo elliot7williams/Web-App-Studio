@@ -37,6 +37,12 @@ struct ContentView: View {
                     }
 
                     Button {
+                        StarterPackManager.importZip(into: document)
+                    } label: {
+                        Label("Starter Pack", systemImage: "sparkles.rectangle.stack")
+                    }
+
+                    Button {
                         isShowingSnippets = true
                     } label: {
                         Label("Snippets", systemImage: "curlybraces")
@@ -467,6 +473,24 @@ private struct Sidebar: View {
                     ProjectFileManager.save(document: document)
                 } label: {
                     Label("Save Project", systemImage: "square.and.arrow.down.on.square")
+                }
+
+                Button {
+                    StarterPackManager.importFolder(into: document)
+                } label: {
+                    Label("Import Starter Folder", systemImage: "sparkles.rectangle.stack")
+                }
+
+                Button {
+                    StarterPackManager.importZip(into: document)
+                } label: {
+                    Label("Import Starter ZIP", systemImage: "tray.and.arrow.down")
+                }
+
+                Button {
+                    StarterPackManager.export(document: document)
+                } label: {
+                    Label("Export Starter Pack", systemImage: "square.and.arrow.up")
                 }
 
                 Button {
@@ -1693,6 +1717,7 @@ private struct ReadinessFindingRow: View {
 private struct TemplateGallery: View {
     @EnvironmentObject private var document: WebAppDocument
     @Binding var isPresented: Bool
+    @State private var githubURL = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -1708,6 +1733,24 @@ private struct TemplateGallery: View {
                 Spacer()
 
                 Button {
+                    StarterPackManager.importFolder(into: document)
+                } label: {
+                    Label("Import Folder", systemImage: "folder")
+                }
+
+                Button {
+                    StarterPackManager.importZip(into: document)
+                } label: {
+                    Label("Import ZIP", systemImage: "archivebox")
+                }
+
+                Button {
+                    StarterPackManager.export(document: document)
+                } label: {
+                    Label("Export Pack", systemImage: "square.and.arrow.up")
+                }
+
+                Button {
                     isPresented = false
                 } label: {
                     Label("Close", systemImage: "xmark")
@@ -1715,6 +1758,27 @@ private struct TemplateGallery: View {
                 }
             }
             .padding(20)
+
+            Divider()
+
+            HStack(spacing: 10) {
+                TextField("GitHub repo or starter pack ZIP URL", text: $githubURL)
+                    .textFieldStyle(.roundedBorder)
+
+                Button {
+                    StarterPackManager.importGitHubURL(githubURL, into: document)
+                } label: {
+                    Label("Load", systemImage: "arrow.down.circle")
+                }
+
+                Button {
+                    StarterPackManager.copyGitHubCommand(githubURL, document: document)
+                } label: {
+                    Label("Copy Command", systemImage: "terminal")
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
 
             Divider()
 

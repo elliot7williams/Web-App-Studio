@@ -14,6 +14,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Rotate preview control for quick natural/rotated device checks.
 - Safe area presets for phone notches, feature-phone soft keys, and TV overscan.
 - Template gallery for universal starter, feature phone, TV kiosk, and notes-style web apps.
+- Starter packs that can be exported from the current project and imported from folders, ZIP files, or GitHub repository/ZIP URLs.
 - Snippet library for safe areas, focus states, reduced motion, D-pad navigation, install UI, and touch targets.
 - HTML, CSS, JavaScript, and generated manifest tabs.
 - Import existing web app folders that contain `index.html`.
@@ -27,6 +28,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - USB sync export for mounted devices, removable storage, kiosks, Android/KaiOS-style transfer testing, and embedded browser handoff.
 - Publish presets for GitHub Pages, Netlify, Cloudflare Pages, static hosts, kiosk folders, and removable-device packages.
 - Release Manager for changelog drafts, release commands, GitHub release steps, and macOS notarization checklists.
+- Full local feature list in `FEATURE_LIST.md`.
 - QR code PNG export for sharing live device-test links with testers and handoff packages.
 - Deploy panel with device testing, install, hosting, and ZIP packaging steps.
 - Deployment report export with readiness, performance, device profile, local URLs, and handoff checklist.

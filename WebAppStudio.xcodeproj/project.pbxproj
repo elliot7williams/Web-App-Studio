@@ -32,6 +32,7 @@
 		1A2B3C4D5E6F7000000001F7 /* DeviceTestKitExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000124 /* DeviceTestKitExporter.swift */; };
 		1A2B3C4D5E6F7000000001F8 /* USBDeviceSyncExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000125 /* USBDeviceSyncExporter.swift */; };
 		1A2B3C4D5E6F7000000001F9 /* PublishPresetExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000126 /* PublishPresetExporter.swift */; };
+		1A2B3C4D5E6F7000000001FA /* StarterPackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000127 /* StarterPackManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		1A2B3C4D5E6F700000000124 /* DeviceTestKitExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestKitExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000125 /* USBDeviceSyncExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBDeviceSyncExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000126 /* PublishPresetExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishPresetExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000127 /* StarterPackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarterPackManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				1A2B3C4D5E6F700000000124 /* DeviceTestKitExporter.swift */,
 				1A2B3C4D5E6F700000000125 /* USBDeviceSyncExporter.swift */,
 				1A2B3C4D5E6F700000000126 /* PublishPresetExporter.swift */,
+				1A2B3C4D5E6F700000000127 /* StarterPackManager.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -217,6 +220,7 @@
 				1A2B3C4D5E6F7000000001F7 /* DeviceTestKitExporter.swift in Sources */,
 				1A2B3C4D5E6F7000000001F8 /* USBDeviceSyncExporter.swift in Sources */,
 				1A2B3C4D5E6F7000000001F9 /* PublishPresetExporter.swift in Sources */,
+				1A2B3C4D5E6F7000000001FA /* StarterPackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
