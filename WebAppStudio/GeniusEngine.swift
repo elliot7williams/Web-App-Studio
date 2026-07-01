@@ -21,6 +21,7 @@ enum GeniusEngine {
 
         if privacyFindings.contains(where: { $0.level == .high }) {
             suggestions.append(.init(signal: "privacy", title: "Review sensitive capabilities", detail: "This project appears to use APIs that can trigger permission prompts or policy review.", actionTitle: "Open Privacy", priority: 92))
+            suggestions.append(.init(signal: "storePrivacy", title: "Export a store privacy pack", detail: "Generate reviewer notes, permission rationales, and a questionnaire snapshot before submission.", actionTitle: "Export Store Pack", priority: 88))
         }
 
         if readinessFindings.contains(where: { $0.severity == .error }) {

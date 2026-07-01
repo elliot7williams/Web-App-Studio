@@ -38,6 +38,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Readiness checker for manifest, viewport, offline, installability, focus, and device-input issues.
 - Accessibility Audit panel with automated checks and exportable accessibility reports.
 - Privacy and Permissions inspector with exportable reports for prompt-heavy browser APIs.
+- Store Privacy Pack export with disclosure drafts, permission rationales, reviewer notes, and JSON questionnaire data.
 - Genius Mode with local project-aware suggestions that learn from helpful actions over time.
 - Performance budget panel for generated file sizes across constrained, mobile, tablet, and large-screen targets.
 - Web app icon controls that generate exported 192x192 and 512x512 PNG icons.

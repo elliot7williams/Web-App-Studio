@@ -583,6 +583,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    StorePrivacyPackExporter.export(document: document)
+                } label: {
+                    Label("Export Store Privacy Pack", systemImage: "doc.badge.gearshape")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")
@@ -1846,6 +1852,12 @@ private struct PrivacyPermissionPanel: View {
                     PrivacyPermissionReportExporter.export(document: document)
                 } label: {
                     Label("Export Report", systemImage: "square.and.arrow.up")
+                }
+
+                Button {
+                    StorePrivacyPackExporter.export(document: document)
+                } label: {
+                    Label("Store Pack", systemImage: "doc.badge.gearshape")
                 }
 
                 Button {
