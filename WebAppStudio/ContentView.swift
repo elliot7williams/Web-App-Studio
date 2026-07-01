@@ -559,6 +559,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    LaunchChecklistPackExporter.export(document: document, server: server)
+                } label: {
+                    Label("Export Launch Checklist Pack", systemImage: "checklist")
+                }
+
+                Button {
                     DeploymentReportExporter.export(document: document, server: server)
                 } label: {
                     Label("Export Deployment Report", systemImage: "doc.text.magnifyingglass")

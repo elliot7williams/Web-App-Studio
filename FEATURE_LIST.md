@@ -10,6 +10,7 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Import existing web app folders and zipped web app exports.
 - Export generated web app folders and ZIP packages.
 - Export complete handoff bundles with project source, generated files, App Store notes, deployment reports, and QR assets.
+- Export Launch Checklist Packs with generated files, project source, launch index, QA checklist, major reports, store privacy materials, and optional QR assets.
 
 ## Templates, Starter Packs, And Snippets
 
@@ -53,6 +54,7 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Privacy and Permissions inspector for camera, microphone, location, notifications, clipboard, storage, Bluetooth, USB, contacts, payments, credentials, sensors, downloads, sharing, and network calls.
 - Exportable privacy reports with permission evidence, recommendations, and manual review checklists.
 - Store Privacy Pack export with store disclosure drafts, permission rationale copy, reviewer test notes, and privacy questionnaire JSON.
+- Launch Checklist Pack export that bundles deployment, compatibility, accessibility, privacy, store-review, generated app, and editable project materials for final QA.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.

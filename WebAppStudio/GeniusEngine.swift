@@ -13,6 +13,7 @@ enum GeniusEngine {
         let accessibilityFindings = AccessibilityChecker.findings(for: document)
         let privacyFindings = PrivacyPermissionChecker.findings(for: document)
         let readinessFindings = ReadinessChecker.findings(for: document)
+        let readinessScore = ReadinessChecker.score(for: readinessFindings)
         let performance = PerformanceBudgetChecker.report(for: document)
 
         if accessibilityFindings.contains(where: { $0.severity == .fix }) {
@@ -46,6 +47,10 @@ enum GeniusEngine {
 
         if document.geniusSignals["publishing", default: 0] > 1 || document.geniusSignals["release", default: 0] > 1 {
             suggestions.append(.init(signal: "publishing", title: "Prepare a publish pack", detail: "You often work toward shipping. Export a hosting preset before handoff.", actionTitle: "Open Publish", priority: 70 + document.geniusSignals["publishing", default: 0]))
+        }
+
+        if readinessScore >= 70 || document.geniusSignals["release", default: 0] > 0 || document.geniusSignals["publishing", default: 0] > 0 {
+            suggestions.append(.init(signal: "launchPack", title: "Export a launch checklist pack", detail: "Bundle all QA reports, store privacy notes, project source, and generated files for final review.", actionTitle: "Export Launch Pack", priority: 68 + document.geniusSignals["launchPack", default: 0]))
         }
 
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
