@@ -11,6 +11,8 @@ struct ContentView: View {
     @State private var isShowingPerformance = false
     @State private var isShowingDeploy = false
     @State private var isShowingPublish = false
+    @State private var isShowingReleaseManager = false
+    @State private var isShowingNetworkTest = false
     @State private var autoRefreshServer = false
     @State private var autoRefreshTask: Task<Void, Never>?
 
@@ -89,9 +91,21 @@ struct ContentView: View {
                     }
 
                     Button {
+                        isShowingNetworkTest = true
+                    } label: {
+                        Label("Network Test", systemImage: "wifi")
+                    }
+
+                    Button {
                         isShowingPublish = true
                     } label: {
                         Label("Publish", systemImage: "globe")
+                    }
+
+                    Button {
+                        isShowingReleaseManager = true
+                    } label: {
+                        Label("Release", systemImage: "tag")
                     }
 
                     Button {
@@ -143,6 +157,15 @@ struct ContentView: View {
             .sheet(isPresented: $isShowingPublish) {
                 PublishPanel(isPresented: $isShowingPublish)
                     .environmentObject(document)
+            }
+            .sheet(isPresented: $isShowingReleaseManager) {
+                ReleaseManagerPanel(isPresented: $isShowingReleaseManager)
+                    .environmentObject(document)
+            }
+            .sheet(isPresented: $isShowingNetworkTest) {
+                NetworkTestPanel(isPresented: $isShowingNetworkTest, autoRefreshServer: $autoRefreshServer)
+                    .environmentObject(document)
+                    .environmentObject(server)
             }
         }
         .environmentObject(server)
@@ -412,6 +435,10 @@ private struct Sidebar: View {
                 }
 
                 Text("When enabled, saved server files update shortly after project edits.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Text("Devices on the same Wi-Fi network can open the Device URL or scan the QR code.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -1130,6 +1157,348 @@ private struct PublishPresetCard: View {
             }
         }
         .buttonStyle(.plain)
+    }
+}
+
+private struct ReleaseManagerPanel: View {
+    @EnvironmentObject private var document: WebAppDocument
+    @Binding var isPresented: Bool
+    @State private var version = "0.1.1"
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Release Manager")
+                        .font(.title2.weight(.semibold))
+                    Text("Prepare tags, release notes, build commands, and GitHub upload steps.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+                    isPresented = false
+                } label: {
+                    Label("Close", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .padding(20)
+
+            Divider()
+
+            HStack(alignment: .top, spacing: 16) {
+                VStack(alignment: .leading, spacing: 14) {
+                    TextField("Version", text: $version)
+                        .textFieldStyle(.roundedBorder)
+
+                    Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 10) {
+                        ForEach(checklist, id: \.self) { item in
+                            GridRow {
+                                Image(systemName: "checkmark.circle")
+                                    .foregroundStyle(.green)
+                                Text(item)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                    .font(.subheadline)
+
+                    HStack {
+                        Button {
+                            copy(releaseNotes)
+                            document.statusMessage = "Copied release notes"
+                        } label: {
+                            Label("Copy Notes", systemImage: "doc.on.doc")
+                        }
+
+                        Button {
+                            copy(commands)
+                            document.statusMessage = "Copied release commands"
+                        } label: {
+                            Label("Copy Commands", systemImage: "terminal")
+                        }
+                    }
+                }
+                .padding(16)
+                .frame(width: 330, alignment: .topLeading)
+                .background(Color(nsColor: .controlBackgroundColor))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(nsColor: .separatorColor))
+                }
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Release Notes")
+                                .font(.headline)
+                            Text(releaseNotes)
+                                .font(.body.monospaced())
+                                .textSelection(.enabled)
+                        }
+
+                        Divider()
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("GitHub Commands")
+                                .font(.headline)
+                            Text(commands)
+                                .font(.body.monospaced())
+                                .textSelection(.enabled)
+                        }
+
+                        Divider()
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Notarization Checklist")
+                                .font(.headline)
+                            ForEach(notarizationChecklist, id: \.self) { item in
+                                Label(item, systemImage: "checkmark.circle")
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                    .padding(16)
+                }
+                .background(Color(nsColor: .textBackgroundColor))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(nsColor: .separatorColor))
+                }
+            }
+            .padding(20)
+        }
+        .frame(minWidth: 900, minHeight: 620)
+    }
+
+    private var normalizedVersion: String {
+        version.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "0.1.1" : version.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var tag: String {
+        normalizedVersion.hasPrefix("v") ? normalizedVersion : "v\(normalizedVersion)"
+    }
+
+    private var releaseNotes: String {
+        """
+        # Web App Studio \(normalizedVersion)
+
+        ## Highlights
+
+        - Improved app building workflow for installable web apps.
+        - Device testing support for Wi-Fi, QR, USB/removable storage, custom profiles, and compatibility checks.
+        - Publishing support for GitHub Pages, Netlify, Cloudflare Pages, static hosts, kiosks, and removable devices.
+
+        ## Verification
+
+        - Build the Debug configuration.
+        - Build the Release configuration.
+        - Launch the app locally on macOS.
+        - Export a sample web app ZIP.
+        - Start the Network Test server and scan the QR code on a same-Wi-Fi device.
+        """
+    }
+
+    private var commands: String {
+        """
+        xcodebuild -project WebAppStudio.xcodeproj -scheme WebAppStudio -configuration Release -derivedDataPath /private/tmp/WebAppStudioRelease build
+        mkdir -p Releases
+        ditto -c -k --keepParent /private/tmp/WebAppStudioRelease/Build/Products/Release/WebAppStudio.app Releases/WebAppStudio-macOS-\(normalizedVersion).zip
+        git add .
+        git commit -m "Release \(tag)"
+        git tag \(tag)
+        git push origin main --tags
+        gh release create \(tag) Releases/WebAppStudio-macOS-\(normalizedVersion).zip --title "Web App Studio \(normalizedVersion)" --notes-file RELEASE_NOTES.md
+        """
+    }
+
+    private var checklist: [String] {
+        [
+            "Update release notes and README.",
+            "Run Debug and Release builds.",
+            "Package WebAppStudio.app as a ZIP.",
+            "Commit, tag, push, and create a GitHub release.",
+            "Attach the ZIP and verify the public download."
+        ]
+    }
+
+    private var notarizationChecklist: [String] {
+        [
+            "Use a Developer ID Application signing identity.",
+            "Build with hardened runtime enabled.",
+            "Zip the signed app before notarization.",
+            "Submit with notarytool and wait for acceptance.",
+            "Staple the notarization ticket to the app.",
+            "Re-zip the stapled app for GitHub Releases."
+        ]
+    }
+
+    private func copy(_ value: String) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(value, forType: .string)
+    }
+}
+
+private struct NetworkTestPanel: View {
+    @EnvironmentObject private var document: WebAppDocument
+    @EnvironmentObject private var server: LocalPreviewServer
+    @Binding var isPresented: Bool
+    @Binding var autoRefreshServer: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Network Test")
+                        .font(.title2.weight(.semibold))
+                    Text("Run \(document.appName) from this Mac and open it on any device on the same Wi-Fi network.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+                    isPresented = false
+                } label: {
+                    Label("Close", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .padding(20)
+
+            Divider()
+
+            HStack(alignment: .top, spacing: 18) {
+                VStack(alignment: .leading, spacing: 14) {
+                    HStack {
+                        Label(server.isRunning ? "Server Running" : "Server Stopped", systemImage: server.isRunning ? "wifi" : "power")
+                            .font(.headline)
+                        Spacer()
+                        Circle()
+                            .fill(server.isRunning ? .green : .secondary)
+                            .frame(width: 10, height: 10)
+                    }
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        LabeledContent("Mac URL", value: server.urlString.isEmpty ? "Not running" : server.urlString)
+                        LabeledContent("Device URL", value: server.deviceURLString.isEmpty ? "Start server to discover LAN URL" : server.deviceURLString)
+                        LabeledContent("Current target", value: "\(document.selectedProfile.name), \(document.previewWidth)x\(document.previewHeight)")
+                    }
+                    .font(.subheadline)
+                    .textSelection(.enabled)
+
+                    HStack {
+                        Button {
+                            server.toggle(document: document)
+                        } label: {
+                            Label(server.isRunning ? "Stop Server" : "Start Server", systemImage: server.isRunning ? "stop.circle" : "play.circle")
+                        }
+
+                        Button {
+                            server.refresh(document: document)
+                        } label: {
+                            Label("Refresh", systemImage: "arrow.clockwise")
+                        }
+                        .disabled(!server.isRunning)
+
+                        Button {
+                            copyURL()
+                        } label: {
+                            Label("Copy Device URL", systemImage: "doc.on.doc")
+                        }
+                        .disabled(!server.isRunning)
+                    }
+
+                    HStack {
+                        Button {
+                            QRCodeRenderer.savePNG(for: server.scanURLString, document: document)
+                        } label: {
+                            Label("Save QR", systemImage: "qrcode")
+                        }
+                        .disabled(!server.isRunning)
+
+                        Button {
+                            DeviceTestKitExporter.export(document: document, server: server)
+                        } label: {
+                            Label("Export Test Kit", systemImage: "shippingbox")
+                        }
+                        .disabled(!server.isRunning)
+                    }
+
+                    Toggle(isOn: $autoRefreshServer) {
+                        Label("Auto refresh server after edits", systemImage: "arrow.triangle.2.circlepath")
+                    }
+                    .toggleStyle(.checkbox)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .background(Color(nsColor: .controlBackgroundColor))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(nsColor: .separatorColor))
+                }
+
+                VStack(spacing: 12) {
+                    if server.isRunning {
+                        Image(nsImage: QRCodeRenderer.image(for: server.scanURLString, size: 220))
+                            .interpolation(.none)
+                            .resizable()
+                            .frame(width: 220, height: 220)
+                            .padding(12)
+                            .background(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    } else {
+                        Image(systemName: "qrcode")
+                            .font(.system(size: 92))
+                            .foregroundStyle(.secondary)
+                            .frame(width: 244, height: 244)
+                    }
+
+                    Text(server.isRunning ? "Scan from any same-Wi-Fi device" : "Start server to create QR")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                }
+                .frame(width: 280)
+            }
+            .padding(20)
+
+            Divider()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 10) {
+                    ForEach(instructions, id: \.self) { instruction in
+                        Label(instruction, systemImage: "checkmark.circle")
+                            .font(.subheadline)
+                    }
+                }
+                .padding(20)
+            }
+        }
+        .frame(minWidth: 880, minHeight: 620)
+    }
+
+    private var instructions: [String] {
+        [
+            "Connect your phone, tablet, TV, handheld, kiosk, or embedded device to the same Wi-Fi network as this Mac.",
+            "Start the local server in Web App Studio.",
+            "Scan the QR code or manually open the Device URL.",
+            "Use Refresh after editing, or enable Auto refresh for live iteration.",
+            "For install testing, open the browser menu and choose Add to Home Screen or Install where supported.",
+            "Some service-worker and install behavior may differ from HTTPS hosting, so verify again after publishing."
+        ]
+    }
+
+    private func copyURL() {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(server.scanURLString, forType: .string)
+        document.statusMessage = "Copied \(server.scanURLString)"
     }
 }
 

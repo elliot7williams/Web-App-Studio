@@ -22,9 +22,11 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Preview screenshot PNG export with the current device frame and safe-area overlay.
 - App Store screenshot pack export for phone, tablet, desktop, TV, and legacy-device review images.
 - Local preview server with Mac and device URLs, QR code sharing, manual refresh, and auto refresh controls for same-network browser/device testing.
+- Network Test hub for same-Wi-Fi testing on phones, tablets, TVs, kiosks, handhelds, and embedded browser devices.
 - Device test kit export with live test URL, QR PNG, and hardware testing instructions.
 - USB sync export for mounted devices, removable storage, kiosks, Android/KaiOS-style transfer testing, and embedded browser handoff.
 - Publish presets for GitHub Pages, Netlify, Cloudflare Pages, static hosts, kiosk folders, and removable-device packages.
+- Release Manager for changelog drafts, release commands, GitHub release steps, and macOS notarization checklists.
 - QR code PNG export for sharing live device-test links with testers and handoff packages.
 - Deploy panel with device testing, install, hosting, and ZIP packaging steps.
 - Deployment report export with readiness, performance, device profile, local URLs, and handoff checklist.
