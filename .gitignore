@@ -1,0 +1,7 @@
+DerivedData/
+Releases/
+*.zip
+*.xcuserstate
+xcuserdata/
+.DS_Store
+._*
