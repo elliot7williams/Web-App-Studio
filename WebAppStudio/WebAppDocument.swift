@@ -28,6 +28,8 @@ final class WebAppDocument: ObservableObject {
     @Published var iconSymbol: WebAppIconSymbol = .code
     @Published var iconBackgroundColor = "#1D4ED8"
     @Published var iconForegroundColor = "#FFFFFF"
+    @Published var geniusModeEnabled = true
+    @Published var geniusSignals: [String: Int] = [:]
     @Published var selectedTab: EditorTab = .html
     @Published var statusMessage = "Ready"
 
@@ -102,6 +104,8 @@ final class WebAppDocument: ObservableObject {
             iconSymbol: iconSymbol,
             iconBackgroundColor: iconBackgroundColor,
             iconForegroundColor: iconForegroundColor,
+            geniusModeEnabled: geniusModeEnabled,
+            geniusSignals: geniusSignals,
             html: html,
             css: css,
             javascript: javascript
@@ -404,6 +408,8 @@ final class WebAppDocument: ObservableObject {
         iconSymbol = project.iconSymbol ?? .code
         iconBackgroundColor = project.iconBackgroundColor ?? project.themeColor
         iconForegroundColor = project.iconForegroundColor ?? "#FFFFFF"
+        geniusModeEnabled = project.geniusModeEnabled ?? true
+        geniusSignals = project.geniusSignals ?? [:]
         selectedTab = .html
         html = project.html
         css = project.css
@@ -467,6 +473,12 @@ final class WebAppDocument: ObservableObject {
             index += 1
         }
         return "\(baseName) \(index)"
+    }
+
+    func recordGeniusSignal(_ signal: String, weight: Int = 1) {
+        guard geniusModeEnabled else { return }
+        geniusSignals[signal, default: 0] += weight
+        statusMessage = "Genius learned: \(signal)"
     }
 
     func apply(imported: ImportedWebApp) {
@@ -768,6 +780,8 @@ struct WebAppProject: Codable {
     var iconSymbol: WebAppIconSymbol?
     var iconBackgroundColor: String?
     var iconForegroundColor: String?
+    var geniusModeEnabled: Bool?
+    var geniusSignals: [String: Int]?
     var html: String
     var css: String
     var javascript: String

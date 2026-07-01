@@ -8,11 +8,13 @@ struct ContentView: View {
     @State private var isShowingSnippets = false
     @State private var isShowingDeviceMatrix = false
     @State private var isShowingReadiness = false
+    @State private var isShowingAccessibility = false
     @State private var isShowingPerformance = false
     @State private var isShowingDeploy = false
     @State private var isShowingPublish = false
     @State private var isShowingReleaseManager = false
     @State private var isShowingNetworkTest = false
+    @State private var isShowingGenius = false
     @State private var autoRefreshServer = false
     @State private var autoRefreshTask: Task<Void, Never>?
 
@@ -85,6 +87,12 @@ struct ContentView: View {
                     }
 
                     Button {
+                        isShowingAccessibility = true
+                    } label: {
+                        Label("Accessibility", systemImage: "accessibility")
+                    }
+
+                    Button {
                         isShowingPerformance = true
                     } label: {
                         Label("Budget", systemImage: "speedometer")
@@ -112,6 +120,12 @@ struct ContentView: View {
                         isShowingReleaseManager = true
                     } label: {
                         Label("Release", systemImage: "tag")
+                    }
+
+                    Button {
+                        isShowingGenius = true
+                    } label: {
+                        Label("Genius", systemImage: "brain.head.profile")
                     }
 
                     Button {
@@ -151,6 +165,10 @@ struct ContentView: View {
                 ReadinessPanel(isPresented: $isShowingReadiness)
                     .environmentObject(document)
             }
+            .sheet(isPresented: $isShowingAccessibility) {
+                AccessibilityPanel(isPresented: $isShowingAccessibility)
+                    .environmentObject(document)
+            }
             .sheet(isPresented: $isShowingPerformance) {
                 PerformancePanel(isPresented: $isShowingPerformance)
                     .environmentObject(document)
@@ -172,6 +190,10 @@ struct ContentView: View {
                 NetworkTestPanel(isPresented: $isShowingNetworkTest, autoRefreshServer: $autoRefreshServer)
                     .environmentObject(document)
                     .environmentObject(server)
+            }
+            .sheet(isPresented: $isShowingGenius) {
+                GeniusPanel(isPresented: $isShowingGenius)
+                    .environmentObject(document)
             }
         }
         .environmentObject(server)
@@ -355,6 +377,10 @@ private struct Sidebar: View {
                 ReadinessSummary()
             }
 
+            Section("Accessibility") {
+                AccessibilitySummary()
+            }
+
             Section("Performance") {
                 PerformanceSummary()
             }
@@ -527,6 +553,12 @@ private struct Sidebar: View {
                     DeviceCompatibilityReportExporter.export(document: document)
                 } label: {
                     Label("Export Compatibility Report", systemImage: "checklist.checked")
+                }
+
+                Button {
+                    AccessibilityReportExporter.export(document: document)
+                } label: {
+                    Label("Export Accessibility Report", systemImage: "accessibility")
                 }
 
                 Button {
@@ -768,6 +800,41 @@ private struct PerformanceSummary: View {
         case .tight: return .orange
         case .over: return .red
         }
+    }
+}
+
+private struct AccessibilitySummary: View {
+    @EnvironmentObject private var document: WebAppDocument
+
+    private var findings: [AccessibilityFinding] {
+        AccessibilityChecker.findings(for: document)
+    }
+
+    var body: some View {
+        let counts = AccessibilityChecker.counts(for: findings)
+        let score = AccessibilityChecker.score(for: findings)
+
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Label("\(score)%", systemImage: "accessibility")
+                    .font(.headline.monospacedDigit())
+
+                Spacer()
+
+                Text("\(counts.fix) fix  \(counts.review) review")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            ProgressView(value: Double(score), total: 100)
+                .tint(scoreTint(score))
+        }
+    }
+
+    private func scoreTint(_ score: Int) -> Color {
+        if score >= 85 { return .green }
+        if score >= 65 { return .orange }
+        return .red
     }
 }
 
@@ -1571,6 +1638,259 @@ private struct DeployTargetCard: View {
         }
         .padding(14)
         .frame(maxWidth: .infinity, minHeight: 190, alignment: .topLeading)
+        .background(Color(nsColor: .controlBackgroundColor))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(nsColor: .separatorColor))
+        }
+    }
+}
+
+private struct AccessibilityPanel: View {
+    @EnvironmentObject private var document: WebAppDocument
+    @Binding var isPresented: Bool
+
+    private var findings: [AccessibilityFinding] {
+        AccessibilityChecker.findings(for: document)
+    }
+
+    var body: some View {
+        let counts = AccessibilityChecker.counts(for: findings)
+        let score = AccessibilityChecker.score(for: findings)
+
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Accessibility Audit")
+                        .font(.title2.weight(.semibold))
+                    Text("Check keyboard, screen reader, motion, touch target, and semantic markup basics.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+                    AccessibilityReportExporter.export(document: document)
+                } label: {
+                    Label("Export Report", systemImage: "square.and.arrow.up")
+                }
+
+                Button {
+                    isPresented = false
+                } label: {
+                    Label("Close", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .padding(20)
+
+            Divider()
+
+            HStack(spacing: 12) {
+                ReadinessMetric(title: "Score", value: "\(score)%", color: metricColor(score))
+                ReadinessMetric(title: "Fix", value: "\(counts.fix)", color: .red)
+                ReadinessMetric(title: "Review", value: "\(counts.review)", color: .orange)
+                ReadinessMetric(title: "Improve", value: "\(counts.improve)", color: .green)
+            }
+            .padding(20)
+
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 10) {
+                    ForEach(findings) { finding in
+                        AccessibilityFindingRow(finding: finding)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+            }
+        }
+        .frame(minWidth: 760, minHeight: 540)
+    }
+
+    private func metricColor(_ score: Int) -> Color {
+        if score >= 85 { return .green }
+        if score >= 65 { return .orange }
+        return .red
+    }
+}
+
+private struct AccessibilityFindingRow: View {
+    let finding: AccessibilityFinding
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: finding.severity.systemImage)
+                .foregroundStyle(color)
+                .frame(width: 24)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(finding.title)
+                    .font(.headline)
+                Text(finding.detail)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer()
+
+            Text(finding.severity.rawValue)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(color)
+        }
+        .padding(14)
+        .background(Color(nsColor: .controlBackgroundColor))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(nsColor: .separatorColor))
+        }
+    }
+
+    private var color: Color {
+        switch finding.severity {
+        case .fix: return .red
+        case .review: return .orange
+        case .improve: return .green
+        }
+    }
+}
+
+private struct GeniusPanel: View {
+    @EnvironmentObject private var document: WebAppDocument
+    @Binding var isPresented: Bool
+
+    private var suggestions: [GeniusSuggestion] {
+        GeniusEngine.suggestions(for: document)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Genius Mode")
+                        .font(.title2.weight(.semibold))
+                    Text("Local suggestions that learn from this project and the actions you mark useful.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Toggle("Enabled", isOn: $document.geniusModeEnabled)
+                    .toggleStyle(.switch)
+
+                Button {
+                    document.geniusSignals.removeAll()
+                    document.statusMessage = "Genius learning reset"
+                } label: {
+                    Label("Reset", systemImage: "arrow.counterclockwise")
+                }
+
+                Button {
+                    isPresented = false
+                } label: {
+                    Label("Close", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .padding(20)
+
+            Divider()
+
+            HStack(alignment: .top, spacing: 16) {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(suggestions) { suggestion in
+                            GeniusSuggestionCard(suggestion: suggestion) {
+                                document.recordGeniusSignal(suggestion.signal, weight: 2)
+                            }
+                        }
+                    }
+                    .padding(20)
+                }
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Label("Local Learning", systemImage: "lock")
+                        .font(.headline)
+                    Text("Genius Mode stores simple preference signals inside the project. It does not upload project content or personal data.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Divider()
+
+                    Text("Signals")
+                        .font(.headline)
+
+                    if document.geniusSignals.isEmpty {
+                        Text("No signals yet.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(document.geniusSignals.keys.sorted(), id: \.self) { key in
+                            HStack {
+                                Text(key)
+                                Spacer()
+                                Text("\(document.geniusSignals[key, default: 0])")
+                                    .monospacedDigit()
+                            }
+                            .font(.caption)
+                        }
+                    }
+                }
+                .padding(16)
+                .frame(width: 260, alignment: .topLeading)
+                .background(Color(nsColor: .controlBackgroundColor))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(nsColor: .separatorColor))
+                }
+                .padding(.trailing, 20)
+                .padding(.vertical, 20)
+            }
+        }
+        .frame(minWidth: 860, minHeight: 560)
+    }
+}
+
+private struct GeniusSuggestionCard: View {
+    let suggestion: GeniusSuggestion
+    let markHelpful: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Label(suggestion.title, systemImage: "sparkles")
+                    .font(.headline)
+                Spacer()
+                Text("\(suggestion.priority)")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(.secondary)
+            }
+
+            Text(suggestion.detail)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            HStack {
+                Text(suggestion.actionTitle)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color.accentColor)
+
+                Spacer()
+
+                Button(action: markHelpful) {
+                    Label("Helpful", systemImage: "hand.thumbsup")
+                }
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(Color(nsColor: .controlBackgroundColor))
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay {
