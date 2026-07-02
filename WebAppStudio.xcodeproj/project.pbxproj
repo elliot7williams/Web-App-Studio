@@ -43,6 +43,7 @@
 		1A2B3C4D5E6F700000000202 /* SecurityHeadersPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000135 /* SecurityHeadersPackExporter.swift */; };
 		1A2B3C4D5E6F700000000203 /* SEOSharePackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000136 /* SEOSharePackExporter.swift */; };
 		1A2B3C4D5E6F700000000204 /* LocalizationPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000137 /* LocalizationPackExporter.swift */; };
+		1A2B3C4D5E6F700000000205 /* AnalyticsPlanPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000138 /* AnalyticsPlanPackExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		1A2B3C4D5E6F700000000135 /* SecurityHeadersPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityHeadersPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000136 /* SEOSharePackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEOSharePackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000137 /* LocalizationPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000138 /* AnalyticsPlanPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPlanPackExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				1A2B3C4D5E6F700000000135 /* SecurityHeadersPackExporter.swift */,
 				1A2B3C4D5E6F700000000136 /* SEOSharePackExporter.swift */,
 				1A2B3C4D5E6F700000000137 /* LocalizationPackExporter.swift */,
+				1A2B3C4D5E6F700000000138 /* AnalyticsPlanPackExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -261,6 +264,7 @@
 				1A2B3C4D5E6F700000000202 /* SecurityHeadersPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000203 /* SEOSharePackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000204 /* LocalizationPackExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000205 /* AnalyticsPlanPackExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,6 +37,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "localization", title: "Prepare localization files", detail: "Export translation templates, localized manifest starters, hreflang tags, and language QA notes.", actionTitle: "Export Locale Pack", priority: 76 + document.geniusSignals["localization", default: 0]))
         }
 
+        if readinessScore >= 65 || privacyFindings.contains(where: { $0.capability == "Network Requests" }) {
+            suggestions.append(.init(signal: "analytics", title: "Plan privacy-safe analytics", detail: "Export a measurement plan, event taxonomy, analytics QA checklist, and privacy review.", actionTitle: "Export Analytics", priority: 75 + document.geniusSignals["analytics", default: 0]))
+        }
+
         if readinessFindings.contains(where: { $0.severity == .error }) {
             suggestions.append(.init(signal: "readiness", title: "Fix launch blockers", detail: "Readiness found blocking issues that can affect installs and exports.", actionTitle: "Open Readiness", priority: 90))
         }

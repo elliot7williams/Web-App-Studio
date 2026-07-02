@@ -613,6 +613,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    AnalyticsPlanPackExporter.export(document: document)
+                } label: {
+                    Label("Export Analytics Plan Pack", systemImage: "chart.xyaxis.line")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

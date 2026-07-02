@@ -61,6 +61,13 @@ enum LaunchChecklistPackExporter {
             try LocalizationPackExporter.manifestLocalesJSON(document: document).write(to: localizationFolder.appendingPathComponent("manifest-locales.json"), atomically: true, encoding: .utf8)
             try LocalizationPackExporter.hreflangTags(document: document).write(to: localizationFolder.appendingPathComponent("hreflang-tags.html"), atomically: true, encoding: .utf8)
 
+            let analyticsFolder = outputURL.appendingPathComponent("Analytics Plan Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: analyticsFolder, withIntermediateDirectories: true)
+            try AnalyticsPlanPackExporter.plan(document: document).write(to: analyticsFolder.appendingPathComponent("ANALYTICS_PLAN.md"), atomically: true, encoding: .utf8)
+            try AnalyticsPlanPackExporter.eventTaxonomyJSON(document: document).write(to: analyticsFolder.appendingPathComponent("event-taxonomy.json"), atomically: true, encoding: .utf8)
+            try AnalyticsPlanPackExporter.qaChecklistCSV(document: document).write(to: analyticsFolder.appendingPathComponent("analytics-qa-checklist.csv"), atomically: true, encoding: .utf8)
+            try AnalyticsPlanPackExporter.privacyReview(document: document).write(to: analyticsFolder.appendingPathComponent("analytics-privacy-review.md"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -106,6 +113,7 @@ enum LaunchChecklistPackExporter {
         - Security Headers Pack/
         - SEO Share Pack/
         - Localization Pack/
+        - Analytics Plan Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -117,7 +125,8 @@ enum LaunchChecklistPackExporter {
         5. Review Security Headers Pack/ with the person hosting the app.
         6. Review SEO Share Pack/ before publishing publicly.
         7. Review Localization Pack/ before adding languages or store locales.
-        8. Re-export this pack after any final code or metadata change.
+        8. Review Analytics Plan Pack/ before adding telemetry or launch metrics.
+        9. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -157,6 +166,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Security Headers Pack/ to configure CSP and permissions policies on the production host.
         - [ ] Use SEO Share Pack/ for social previews, robots.txt, sitemap.xml, and structured data.
         - [ ] Use Localization Pack/ for translated manifest, visible copy, and language QA.
+        - [ ] Use Analytics Plan Pack/ to define launch events and privacy-safe measurement QA.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 
