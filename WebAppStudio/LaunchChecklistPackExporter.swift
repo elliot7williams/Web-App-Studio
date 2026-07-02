@@ -146,6 +146,9 @@ enum LaunchChecklistPackExporter {
             let qaFolder = outputURL.appendingPathComponent("QA Test Plan Pack", isDirectory: true)
             try QATestPlanPackExporter.writePack(document: document, to: qaFolder)
 
+            let rollbackFolder = outputURL.appendingPathComponent("Rollback Snapshot Pack", isDirectory: true)
+            try RollbackSnapshotPackExporter.writePack(document: document, to: rollbackFolder)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -205,6 +208,7 @@ enum LaunchChecklistPackExporter {
         - Host Deployment Pack/
         - Installability Audit Pack/
         - QA Test Plan Pack/
+        - Rollback Snapshot Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -230,7 +234,8 @@ enum LaunchChecklistPackExporter {
         19. Review Host Deployment Pack/ before uploading to production hosting.
         20. Run Installability Audit Pack/ before asking testers to install.
         21. Share QA Test Plan Pack/ with testers before sign-off.
-        22. Re-export this pack after any final code or metadata change.
+        22. Archive Rollback Snapshot Pack/ as the last known-good restore point.
+        23. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -284,6 +289,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Host Deployment Pack/ to choose hosting, apply cache rules, and verify production deploy settings.
         - [ ] Use Installability Audit Pack/ to verify manifest, icons, HTTPS, service worker, and installed launch behavior.
         - [ ] Use QA Test Plan Pack/ to record pass/fail results across target devices and browsers.
+        - [ ] Use Rollback Snapshot Pack/ to preserve last known-good generated files and restore steps.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

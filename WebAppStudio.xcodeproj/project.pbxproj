@@ -57,6 +57,7 @@
 		1A2B3C4D5E6F700000000210 /* HostDeploymentPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000143 /* HostDeploymentPackExporter.swift */; };
 		1A2B3C4D5E6F700000000211 /* InstallabilityAuditPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000144 /* InstallabilityAuditPackExporter.swift */; };
 		1A2B3C4D5E6F700000000212 /* QATestPlanPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000145 /* QATestPlanPackExporter.swift */; };
+		1A2B3C4D5E6F700000000213 /* RollbackSnapshotPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000146 /* RollbackSnapshotPackExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		1A2B3C4D5E6F700000000143 /* HostDeploymentPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDeploymentPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000144 /* InstallabilityAuditPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallabilityAuditPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000145 /* QATestPlanPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QATestPlanPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000146 /* RollbackSnapshotPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollbackSnapshotPackExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				1A2B3C4D5E6F700000000143 /* HostDeploymentPackExporter.swift */,
 				1A2B3C4D5E6F700000000144 /* InstallabilityAuditPackExporter.swift */,
 				1A2B3C4D5E6F700000000145 /* QATestPlanPackExporter.swift */,
+				1A2B3C4D5E6F700000000146 /* RollbackSnapshotPackExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -317,6 +320,7 @@
 				1A2B3C4D5E6F700000000210 /* HostDeploymentPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000211 /* InstallabilityAuditPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000212 /* QATestPlanPackExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000213 /* RollbackSnapshotPackExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

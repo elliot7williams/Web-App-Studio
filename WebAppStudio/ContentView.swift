@@ -631,6 +631,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    RollbackSnapshotPackExporter.export(document: document)
+                } label: {
+                    Label("Export Rollback Snapshot Pack", systemImage: "arrow.uturn.backward.square")
+                }
+
+                Button {
                     SEOSharePackExporter.export(document: document)
                 } label: {
                     Label("Export SEO Share Pack", systemImage: "link")

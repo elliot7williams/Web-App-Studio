@@ -121,6 +121,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "qaTestPlan", title: "Prepare QA test cases", detail: "Export a tester runbook, device matrix, smoke script, and fillable pass/fail results CSV.", actionTitle: "Export QA", priority: 55 + document.geniusSignals["qaTestPlan", default: 0]))
         }
 
+        if readinessScore >= 70 || document.geniusSignals["release", default: 0] > 0 {
+            suggestions.append(.init(signal: "rollbackSnapshot", title: "Save a rollback snapshot", detail: "Export last known-good files, project source, cache purge notes, and restore checklist before release.", actionTitle: "Export Rollback", priority: 55 + document.geniusSignals["rollbackSnapshot", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions
