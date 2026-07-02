@@ -625,6 +625,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    QATestPlanPackExporter.export(document: document)
+                } label: {
+                    Label("Export QA Test Plan Pack", systemImage: "checkmark.rectangle.stack")
+                }
+
+                Button {
                     SEOSharePackExporter.export(document: document)
                 } label: {
                     Label("Export SEO Share Pack", systemImage: "link")

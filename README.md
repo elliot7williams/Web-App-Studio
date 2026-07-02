@@ -57,6 +57,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Browser Compatibility Pack export with browser matrix, lab script, install checks, offline checks, and legacy target notes.
 - Host Deployment Pack export with static host matrix, deploy checklist, cache rules, and hosting config snippets.
 - Installability Audit Pack export with manifest review, install test script, service worker checks, and installed-launch checklist.
+- QA Test Plan Pack export with tester runbook, test cases CSV, device matrix, smoke script, and JSON checklist.
 - Genius Mode with local project-aware suggestions that learn from helpful actions over time.
 - Performance budget panel for generated file sizes across constrained, mobile, tablet, and large-screen targets.
 - Web app icon controls that generate exported 192x192 and 512x512 PNG icons.
