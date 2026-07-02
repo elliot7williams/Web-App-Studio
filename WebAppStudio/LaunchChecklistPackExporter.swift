@@ -37,6 +37,14 @@ enum LaunchChecklistPackExporter {
             try StorePrivacyPackExporter.reviewerNotes(document: document).write(to: storeFolder.appendingPathComponent("reviewer-notes.md"), atomically: true, encoding: .utf8)
             try StorePrivacyPackExporter.questionnaireJSON(document: document).write(to: storeFolder.appendingPathComponent("privacy-questionnaire.json"), options: [.atomic])
 
+            let securityFolder = outputURL.appendingPathComponent("Security Headers Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: securityFolder, withIntermediateDirectories: true)
+            try SecurityHeadersPackExporter.readme(document: document).write(to: securityFolder.appendingPathComponent("SECURITY_HEADERS.md"), atomically: true, encoding: .utf8)
+            try SecurityHeadersPackExporter.netlifyHeaders(document: document).write(to: securityFolder.appendingPathComponent("_headers"), atomically: true, encoding: .utf8)
+            try SecurityHeadersPackExporter.cloudflareHeaders(document: document).write(to: securityFolder.appendingPathComponent("cloudflare-headers.txt"), atomically: true, encoding: .utf8)
+            try SecurityHeadersPackExporter.apacheHTAccess(document: document).write(to: securityFolder.appendingPathComponent(".htaccess"), atomically: true, encoding: .utf8)
+            try SecurityHeadersPackExporter.nginxSnippet(document: document).write(to: securityFolder.appendingPathComponent("nginx-security-snippet.conf"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -79,6 +87,7 @@ enum LaunchChecklistPackExporter {
         - ACCESSIBILITY_REPORT.md
         - PRIVACY_PERMISSIONS.md
         - Store Privacy Pack/
+        - Security Headers Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -87,7 +96,8 @@ enum LaunchChecklistPackExporter {
         2. Test Generated Web App/ locally and on real devices.
         3. Review accessibility, privacy, device compatibility, and performance reports.
         4. Use Store Privacy Pack/ when preparing store submission notes.
-        5. Re-export this pack after any final code or metadata change.
+        5. Review Security Headers Pack/ with the person hosting the app.
+        6. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -124,6 +134,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Review DEVICE_COMPATIBILITY.md for any target marked Needs work.
         - [ ] Review DEPLOYMENT_REPORT.md with the person hosting or testing the app.
         - [ ] Use Store Privacy Pack/ for store reviewer notes and privacy disclosure drafts.
+        - [ ] Use Security Headers Pack/ to configure CSP and permissions policies on the production host.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

@@ -40,6 +40,7 @@
 		1A2B3C4D5E6F7000000001FF /* PrivacyPermissionReportExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000132 /* PrivacyPermissionReportExporter.swift */; };
 		1A2B3C4D5E6F700000000200 /* StorePrivacyPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000133 /* StorePrivacyPackExporter.swift */; };
 		1A2B3C4D5E6F700000000201 /* LaunchChecklistPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000134 /* LaunchChecklistPackExporter.swift */; };
+		1A2B3C4D5E6F700000000202 /* SecurityHeadersPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000135 /* SecurityHeadersPackExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		1A2B3C4D5E6F700000000132 /* PrivacyPermissionReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPermissionReportExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000133 /* StorePrivacyPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePrivacyPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000134 /* LaunchChecklistPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchChecklistPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000135 /* SecurityHeadersPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityHeadersPackExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				1A2B3C4D5E6F700000000132 /* PrivacyPermissionReportExporter.swift */,
 				1A2B3C4D5E6F700000000133 /* StorePrivacyPackExporter.swift */,
 				1A2B3C4D5E6F700000000134 /* LaunchChecklistPackExporter.swift */,
+				1A2B3C4D5E6F700000000135 /* SecurityHeadersPackExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -249,6 +252,7 @@
 				1A2B3C4D5E6F7000000001FF /* PrivacyPermissionReportExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000200 /* StorePrivacyPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000201 /* LaunchChecklistPackExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000202 /* SecurityHeadersPackExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

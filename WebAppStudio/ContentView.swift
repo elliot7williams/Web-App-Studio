@@ -595,6 +595,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    SecurityHeadersPackExporter.export(document: document)
+                } label: {
+                    Label("Export Security Headers Pack", systemImage: "lock.shield")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

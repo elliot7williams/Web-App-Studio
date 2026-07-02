@@ -25,6 +25,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "storePrivacy", title: "Export a store privacy pack", detail: "Generate reviewer notes, permission rationales, and a questionnaire snapshot before submission.", actionTitle: "Export Store Pack", priority: 88))
         }
 
+        if privacyFindings.contains(where: { $0.capability == "Network Requests" || $0.level == .high }) || document.geniusSignals["publishing", default: 0] > 0 {
+            suggestions.append(.init(signal: "securityHeaders", title: "Prepare hosting security headers", detail: "Generate CSP, Permissions-Policy, and host-specific header drafts before publishing.", actionTitle: "Export Headers", priority: 84 + document.geniusSignals["securityHeaders", default: 0]))
+        }
+
         if readinessFindings.contains(where: { $0.severity == .error }) {
             suggestions.append(.init(signal: "readiness", title: "Fix launch blockers", detail: "Readiness found blocking issues that can affect installs and exports.", actionTitle: "Open Readiness", priority: 90))
         }
