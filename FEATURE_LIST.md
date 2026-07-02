@@ -59,6 +59,7 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - SEO Share Pack export with title/description guidance, Open Graph and Twitter tags, robots.txt, sitemap.xml, and SoftwareApplication JSON-LD.
 - Localization Pack export with translator CSV, string catalog JSON, localized manifest starter, hreflang tags, and multi-language QA checklist.
 - Analytics Plan Pack export with launch measurement goals, event taxonomy JSON, analytics QA CSV, and privacy review notes.
+- Performance Budget Pack export with generated size budgets, asset CSV, runtime checklist JSON, and real-device test plan.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.

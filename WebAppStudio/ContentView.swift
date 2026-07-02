@@ -619,6 +619,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    PerformanceBudgetPackExporter.export(document: document)
+                } label: {
+                    Label("Export Performance Budget Pack", systemImage: "speedometer")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

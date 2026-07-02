@@ -45,6 +45,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - SEO Share Pack export with meta tags, Open Graph/Twitter tags, robots.txt, sitemap.xml, and structured data drafts.
 - Localization Pack export with translation CSV, strings JSON, localized manifest starter, hreflang tags, and language QA notes.
 - Analytics Plan Pack export with event taxonomy, measurement plan, QA checklist, and privacy review notes.
+- Performance Budget Pack export with asset budget CSV, runtime checks, and real-device test planning.
 - Genius Mode with local project-aware suggestions that learn from helpful actions over time.
 - Performance budget panel for generated file sizes across constrained, mobile, tablet, and large-screen targets.
 - Web app icon controls that generate exported 192x192 and 512x512 PNG icons.

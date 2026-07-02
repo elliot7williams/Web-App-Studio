@@ -68,6 +68,13 @@ enum LaunchChecklistPackExporter {
             try AnalyticsPlanPackExporter.qaChecklistCSV(document: document).write(to: analyticsFolder.appendingPathComponent("analytics-qa-checklist.csv"), atomically: true, encoding: .utf8)
             try AnalyticsPlanPackExporter.privacyReview(document: document).write(to: analyticsFolder.appendingPathComponent("analytics-privacy-review.md"), atomically: true, encoding: .utf8)
 
+            let performanceFolder = outputURL.appendingPathComponent("Performance Budget Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: performanceFolder, withIntermediateDirectories: true)
+            try PerformanceBudgetPackExporter.budgetGuide(document: document).write(to: performanceFolder.appendingPathComponent("PERFORMANCE_BUDGET.md"), atomically: true, encoding: .utf8)
+            try PerformanceBudgetPackExporter.assetBudgetCSV(document: document).write(to: performanceFolder.appendingPathComponent("asset-budget.csv"), atomically: true, encoding: .utf8)
+            try PerformanceBudgetPackExporter.testPlan(document: document).write(to: performanceFolder.appendingPathComponent("performance-test-plan.md"), atomically: true, encoding: .utf8)
+            try PerformanceBudgetPackExporter.runtimeChecklistJSON(document: document).write(to: performanceFolder.appendingPathComponent("runtime-checklist.json"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -114,6 +121,7 @@ enum LaunchChecklistPackExporter {
         - SEO Share Pack/
         - Localization Pack/
         - Analytics Plan Pack/
+        - Performance Budget Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -126,7 +134,8 @@ enum LaunchChecklistPackExporter {
         6. Review SEO Share Pack/ before publishing publicly.
         7. Review Localization Pack/ before adding languages or store locales.
         8. Review Analytics Plan Pack/ before adding telemetry or launch metrics.
-        9. Re-export this pack after any final code or metadata change.
+        9. Review Performance Budget Pack/ before testing on lower-end devices.
+        10. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -167,6 +176,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use SEO Share Pack/ for social previews, robots.txt, sitemap.xml, and structured data.
         - [ ] Use Localization Pack/ for translated manifest, visible copy, and language QA.
         - [ ] Use Analytics Plan Pack/ to define launch events and privacy-safe measurement QA.
+        - [ ] Use Performance Budget Pack/ to confirm generated files stay inside device-ready limits.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

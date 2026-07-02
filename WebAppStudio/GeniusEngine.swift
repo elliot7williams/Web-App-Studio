@@ -49,6 +49,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "performance", title: "Trim the first load", detail: "The current target is close to or over its generated asset budget.", actionTitle: "Open Budget", priority: 82))
         }
 
+        if performance.status != .good || readinessScore >= 70 {
+            suggestions.append(.init(signal: "performancePack", title: "Export a performance budget pack", detail: "Create asset budgets, runtime checks, and a real-device performance test plan.", actionTitle: "Export Perf Pack", priority: 73 + document.geniusSignals["performancePack", default: 0]))
+        }
+
         if document.selectedProfile.family.localizedCaseInsensitiveContains("living") || document.selectedProfile.family.localizedCaseInsensitiveContains("tv") {
             suggestions.append(.init(signal: "tv", title: "Add remote-friendly navigation", detail: "TV and kiosk experiences benefit from strong focus states and D-pad handling.", actionTitle: "Insert D-pad Snippet", priority: 74))
         }
