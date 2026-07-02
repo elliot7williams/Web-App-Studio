@@ -97,6 +97,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "incidentResponse", title: "Prepare incident response", detail: "Export severity levels, incident log, evidence checklist, status drafts, and recovery manifest.", actionTitle: "Export Incident", priority: 60 + document.geniusSignals["incidentResponse", default: 0]))
         }
 
+        if readinessScore >= 60 || document.geniusSignals["release", default: 0] > 0 {
+            suggestions.append(.init(signal: "designSystem", title: "Export design system tokens", detail: "Create color tokens, CSS variables, component QA, and target-device visual checks.", actionTitle: "Export Design", priority: 59 + document.geniusSignals["designSystem", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions

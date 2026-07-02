@@ -123,6 +123,14 @@ enum LaunchChecklistPackExporter {
             try IncidentResponsePackExporter.evidenceChecklist(document: document).write(to: incidentFolder.appendingPathComponent("evidence-checklist.md"), atomically: true, encoding: .utf8)
             try IncidentResponsePackExporter.recoveryManifestJSON(document: document).write(to: incidentFolder.appendingPathComponent("recovery-manifest.json"), atomically: true, encoding: .utf8)
 
+            let designFolder = outputURL.appendingPathComponent("Design System Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: designFolder, withIntermediateDirectories: true)
+            try DesignSystemPackExporter.designGuide(document: document).write(to: designFolder.appendingPathComponent("DESIGN_SYSTEM.md"), atomically: true, encoding: .utf8)
+            try DesignSystemPackExporter.tokensJSON(document: document).write(to: designFolder.appendingPathComponent("design-tokens.json"), atomically: true, encoding: .utf8)
+            try DesignSystemPackExporter.cssTokens(document: document).write(to: designFolder.appendingPathComponent("tokens.css"), atomically: true, encoding: .utf8)
+            try DesignSystemPackExporter.componentChecklist(document: document).write(to: designFolder.appendingPathComponent("component-checklist.md"), atomically: true, encoding: .utf8)
+            try DesignSystemPackExporter.uiQA(document: document).write(to: designFolder.appendingPathComponent("ui-qa-checklist.md"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -176,6 +184,7 @@ enum LaunchChecklistPackExporter {
         - Compliance Review Pack/
         - Maintenance Plan Pack/
         - Incident Response Pack/
+        - Design System Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -195,7 +204,8 @@ enum LaunchChecklistPackExporter {
         13. Review Compliance Review Pack/ with privacy, policy, or legal owners when needed.
         14. Share Maintenance Plan Pack/ with whoever will own the app after launch.
         15. Share Incident Response Pack/ with support and hosting owners.
-        16. Re-export this pack after any final code or metadata change.
+        16. Review Design System Pack/ before final screenshots and UI QA.
+        17. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -243,6 +253,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Compliance Review Pack/ to prepare privacy, accessibility, storage, policy, and store review decisions.
         - [ ] Use Maintenance Plan Pack/ to schedule recurring tests, backups, and ownership reviews.
         - [ ] Use Incident Response Pack/ to prepare outage handling, recovery, evidence, and status updates.
+        - [ ] Use Design System Pack/ to confirm tokens, components, and UI QA match the target device.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

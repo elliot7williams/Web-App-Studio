@@ -661,6 +661,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    DesignSystemPackExporter.export(document: document)
+                } label: {
+                    Label("Export Design System Pack", systemImage: "paintpalette")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")
