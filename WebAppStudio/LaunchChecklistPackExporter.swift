@@ -75,6 +75,14 @@ enum LaunchChecklistPackExporter {
             try PerformanceBudgetPackExporter.testPlan(document: document).write(to: performanceFolder.appendingPathComponent("performance-test-plan.md"), atomically: true, encoding: .utf8)
             try PerformanceBudgetPackExporter.runtimeChecklistJSON(document: document).write(to: performanceFolder.appendingPathComponent("runtime-checklist.json"), atomically: true, encoding: .utf8)
 
+            let feedbackFolder = outputURL.appendingPathComponent("Beta Feedback Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: feedbackFolder, withIntermediateDirectories: true)
+            try BetaFeedbackPackExporter.testerGuide(document: document).write(to: feedbackFolder.appendingPathComponent("BETA_TESTER_GUIDE.md"), atomically: true, encoding: .utf8)
+            try BetaFeedbackPackExporter.issueTemplate(document: document).write(to: feedbackFolder.appendingPathComponent("issue-template.md"), atomically: true, encoding: .utf8)
+            try BetaFeedbackPackExporter.triageCSV(document: document).write(to: feedbackFolder.appendingPathComponent("feedback-triage.csv"), atomically: true, encoding: .utf8)
+            try BetaFeedbackPackExporter.feedbackSchemaJSON(document: document).write(to: feedbackFolder.appendingPathComponent("feedback-schema.json"), atomically: true, encoding: .utf8)
+            try BetaFeedbackPackExporter.feedbackFormHTML(document: document).write(to: feedbackFolder.appendingPathComponent("feedback-form.html"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -122,6 +130,7 @@ enum LaunchChecklistPackExporter {
         - Localization Pack/
         - Analytics Plan Pack/
         - Performance Budget Pack/
+        - Beta Feedback Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -135,7 +144,8 @@ enum LaunchChecklistPackExporter {
         7. Review Localization Pack/ before adding languages or store locales.
         8. Review Analytics Plan Pack/ before adding telemetry or launch metrics.
         9. Review Performance Budget Pack/ before testing on lower-end devices.
-        10. Re-export this pack after any final code or metadata change.
+        10. Share Beta Feedback Pack/ with testers before wider release.
+        11. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -177,6 +187,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Localization Pack/ for translated manifest, visible copy, and language QA.
         - [ ] Use Analytics Plan Pack/ to define launch events and privacy-safe measurement QA.
         - [ ] Use Performance Budget Pack/ to confirm generated files stay inside device-ready limits.
+        - [ ] Use Beta Feedback Pack/ to collect tester issues, device details, and launch notes.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

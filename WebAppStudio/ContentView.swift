@@ -625,6 +625,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    BetaFeedbackPackExporter.export(document: document)
+                } label: {
+                    Label("Export Beta Feedback Pack", systemImage: "bubble.left.and.text.bubble.right")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")
