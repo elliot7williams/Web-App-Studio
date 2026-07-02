@@ -91,6 +91,14 @@ enum LaunchChecklistPackExporter {
             try SupportHandoffPackExporter.knownIssuesCSV(document: document).write(to: supportFolder.appendingPathComponent("known-issues.csv"), atomically: true, encoding: .utf8)
             try SupportHandoffPackExporter.supportManifestJSON(document: document).write(to: supportFolder.appendingPathComponent("support-manifest.json"), atomically: true, encoding: .utf8)
 
+            let releaseFolder = outputURL.appendingPathComponent("Release Notes Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: releaseFolder, withIntermediateDirectories: true)
+            try ReleaseNotesPackExporter.releaseNotes(document: document).write(to: releaseFolder.appendingPathComponent("RELEASE_NOTES.md"), atomically: true, encoding: .utf8)
+            try ReleaseNotesPackExporter.changelog(document: document).write(to: releaseFolder.appendingPathComponent("CHANGELOG.md"), atomically: true, encoding: .utf8)
+            try ReleaseNotesPackExporter.qaDeltaChecklist(document: document).write(to: releaseFolder.appendingPathComponent("qa-delta-checklist.md"), atomically: true, encoding: .utf8)
+            try ReleaseNotesPackExporter.announcementCopy(document: document).write(to: releaseFolder.appendingPathComponent("announcement-copy.txt"), atomically: true, encoding: .utf8)
+            try ReleaseNotesPackExporter.versionManifestJSON(document: document).write(to: releaseFolder.appendingPathComponent("version-manifest.json"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -140,6 +148,7 @@ enum LaunchChecklistPackExporter {
         - Performance Budget Pack/
         - Beta Feedback Pack/
         - Support Handoff Pack/
+        - Release Notes Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -155,7 +164,8 @@ enum LaunchChecklistPackExporter {
         9. Review Performance Budget Pack/ before testing on lower-end devices.
         10. Share Beta Feedback Pack/ with testers before wider release.
         11. Share Support Handoff Pack/ with whoever will support the app after launch.
-        12. Re-export this pack after any final code or metadata change.
+        12. Complete Release Notes Pack/ before announcing the build.
+        13. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -199,6 +209,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Performance Budget Pack/ to confirm generated files stay inside device-ready limits.
         - [ ] Use Beta Feedback Pack/ to collect tester issues, device details, and launch notes.
         - [ ] Use Support Handoff Pack/ to prepare troubleshooting, known issues, and rollback notes.
+        - [ ] Use Release Notes Pack/ to document what changed, what to test, and what to announce.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

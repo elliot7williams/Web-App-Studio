@@ -48,6 +48,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Performance Budget Pack export with asset budget CSV, runtime checks, and real-device test planning.
 - Beta Feedback Pack export with tester guide, issue template, triage CSV, schema, and static feedback form.
 - Support Handoff Pack export with troubleshooting, rollback, known issues, and support manifest files.
+- Release Notes Pack export with user-facing notes, changelog, QA delta checklist, announcement copy, and version manifest.
 - Genius Mode with local project-aware suggestions that learn from helpful actions over time.
 - Performance budget panel for generated file sizes across constrained, mobile, tablet, and large-screen targets.
 - Web app icon controls that generate exported 192x192 and 512x512 PNG icons.

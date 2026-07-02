@@ -637,6 +637,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    ReleaseNotesPackExporter.export(document: document)
+                } label: {
+                    Label("Export Release Notes Pack", systemImage: "newspaper")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")
