@@ -619,6 +619,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    InstallabilityAuditPackExporter.export(document: document)
+                } label: {
+                    Label("Export Installability Audit Pack", systemImage: "app.badge.checkmark")
+                }
+
+                Button {
                     SEOSharePackExporter.export(document: document)
                 } label: {
                     Label("Export SEO Share Pack", systemImage: "link")

@@ -113,6 +113,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "hostDeployment", title: "Prepare production hosting", detail: "Export host deployment notes, config snippets, cache rules, and a deploy checklist for static hosts.", actionTitle: "Export Hosting", priority: 56 + document.geniusSignals["hostDeployment", default: 0]))
         }
 
+        if document.includeInstallPrompt || document.includeOfflineCache || readinessScore >= 60 {
+            suggestions.append(.init(signal: "installability", title: "Audit installability", detail: "Export manifest, icon, service worker, HTTPS, and installed-launch checks before tester installs.", actionTitle: "Export Install", priority: 56 + document.geniusSignals["installability", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions

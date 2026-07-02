@@ -140,6 +140,9 @@ enum LaunchChecklistPackExporter {
             let hostFolder = outputURL.appendingPathComponent("Host Deployment Pack", isDirectory: true)
             try HostDeploymentPackExporter.writePack(document: document, to: hostFolder)
 
+            let installabilityFolder = outputURL.appendingPathComponent("Installability Audit Pack", isDirectory: true)
+            try InstallabilityAuditPackExporter.writePack(document: document, to: installabilityFolder)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -197,6 +200,7 @@ enum LaunchChecklistPackExporter {
         - Project Handoff Pack/
         - Browser Compatibility Pack/
         - Host Deployment Pack/
+        - Installability Audit Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -220,7 +224,8 @@ enum LaunchChecklistPackExporter {
         17. Archive Project Handoff Pack/ with the editable project for future changes.
         18. Run Browser Compatibility Pack/ across browser engines and legacy web app targets.
         19. Review Host Deployment Pack/ before uploading to production hosting.
-        20. Re-export this pack after any final code or metadata change.
+        20. Run Installability Audit Pack/ before asking testers to install.
+        21. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -272,6 +277,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Project Handoff Pack/ to archive the editable project and future rebuild notes.
         - [ ] Use Browser Compatibility Pack/ to test browser engines, install flow, offline behavior, and input modes.
         - [ ] Use Host Deployment Pack/ to choose hosting, apply cache rules, and verify production deploy settings.
+        - [ ] Use Installability Audit Pack/ to verify manifest, icons, HTTPS, service worker, and installed launch behavior.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 
