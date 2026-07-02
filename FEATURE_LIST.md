@@ -69,6 +69,7 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Design System Pack export with brand tokens, design-tokens JSON, CSS variables, component checklist, and UI QA checklist.
 - Project Handoff Pack export with editable `.webappstudio` source, rebuild instructions, transfer checklist, project metadata, and import manifest.
 - Browser Compatibility Pack export with browser matrix CSV, lab script, JSON checklist, install checks, offline checks, and legacy target notes.
+- Host Deployment Pack export with host matrix CSV, deploy checklist JSON, cache rules, and config snippets for common static hosts.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.

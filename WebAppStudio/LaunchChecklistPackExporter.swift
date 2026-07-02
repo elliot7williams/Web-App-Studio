@@ -137,6 +137,9 @@ enum LaunchChecklistPackExporter {
             let browserFolder = outputURL.appendingPathComponent("Browser Compatibility Pack", isDirectory: true)
             try BrowserCompatibilityPackExporter.writePack(document: document, to: browserFolder)
 
+            let hostFolder = outputURL.appendingPathComponent("Host Deployment Pack", isDirectory: true)
+            try HostDeploymentPackExporter.writePack(document: document, to: hostFolder)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -193,6 +196,7 @@ enum LaunchChecklistPackExporter {
         - Design System Pack/
         - Project Handoff Pack/
         - Browser Compatibility Pack/
+        - Host Deployment Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -215,7 +219,8 @@ enum LaunchChecklistPackExporter {
         16. Review Design System Pack/ before final screenshots and UI QA.
         17. Archive Project Handoff Pack/ with the editable project for future changes.
         18. Run Browser Compatibility Pack/ across browser engines and legacy web app targets.
-        19. Re-export this pack after any final code or metadata change.
+        19. Review Host Deployment Pack/ before uploading to production hosting.
+        20. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -266,6 +271,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Design System Pack/ to confirm tokens, components, and UI QA match the target device.
         - [ ] Use Project Handoff Pack/ to archive the editable project and future rebuild notes.
         - [ ] Use Browser Compatibility Pack/ to test browser engines, install flow, offline behavior, and input modes.
+        - [ ] Use Host Deployment Pack/ to choose hosting, apply cache rules, and verify production deploy settings.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

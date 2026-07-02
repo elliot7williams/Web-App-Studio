@@ -613,6 +613,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    HostDeploymentPackExporter.export(document: document)
+                } label: {
+                    Label("Export Host Deployment Pack", systemImage: "server.rack")
+                }
+
+                Button {
                     SEOSharePackExporter.export(document: document)
                 } label: {
                     Label("Export SEO Share Pack", systemImage: "link")
