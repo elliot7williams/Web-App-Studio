@@ -631,6 +631,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    SupportHandoffPackExporter.export(document: document)
+                } label: {
+                    Label("Export Support Handoff Pack", systemImage: "lifepreserver")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

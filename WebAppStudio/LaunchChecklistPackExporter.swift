@@ -83,6 +83,14 @@ enum LaunchChecklistPackExporter {
             try BetaFeedbackPackExporter.feedbackSchemaJSON(document: document).write(to: feedbackFolder.appendingPathComponent("feedback-schema.json"), atomically: true, encoding: .utf8)
             try BetaFeedbackPackExporter.feedbackFormHTML(document: document).write(to: feedbackFolder.appendingPathComponent("feedback-form.html"), atomically: true, encoding: .utf8)
 
+            let supportFolder = outputURL.appendingPathComponent("Support Handoff Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: supportFolder, withIntermediateDirectories: true)
+            try SupportHandoffPackExporter.handoffGuide(document: document).write(to: supportFolder.appendingPathComponent("SUPPORT_HANDOFF.md"), atomically: true, encoding: .utf8)
+            try SupportHandoffPackExporter.troubleshootingRunbook(document: document).write(to: supportFolder.appendingPathComponent("troubleshooting-runbook.md"), atomically: true, encoding: .utf8)
+            try SupportHandoffPackExporter.rollbackPlan(document: document).write(to: supportFolder.appendingPathComponent("rollback-plan.md"), atomically: true, encoding: .utf8)
+            try SupportHandoffPackExporter.knownIssuesCSV(document: document).write(to: supportFolder.appendingPathComponent("known-issues.csv"), atomically: true, encoding: .utf8)
+            try SupportHandoffPackExporter.supportManifestJSON(document: document).write(to: supportFolder.appendingPathComponent("support-manifest.json"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -131,6 +139,7 @@ enum LaunchChecklistPackExporter {
         - Analytics Plan Pack/
         - Performance Budget Pack/
         - Beta Feedback Pack/
+        - Support Handoff Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -145,7 +154,8 @@ enum LaunchChecklistPackExporter {
         8. Review Analytics Plan Pack/ before adding telemetry or launch metrics.
         9. Review Performance Budget Pack/ before testing on lower-end devices.
         10. Share Beta Feedback Pack/ with testers before wider release.
-        11. Re-export this pack after any final code or metadata change.
+        11. Share Support Handoff Pack/ with whoever will support the app after launch.
+        12. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -188,6 +198,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Analytics Plan Pack/ to define launch events and privacy-safe measurement QA.
         - [ ] Use Performance Budget Pack/ to confirm generated files stay inside device-ready limits.
         - [ ] Use Beta Feedback Pack/ to collect tester issues, device details, and launch notes.
+        - [ ] Use Support Handoff Pack/ to prepare troubleshooting, known issues, and rollback notes.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

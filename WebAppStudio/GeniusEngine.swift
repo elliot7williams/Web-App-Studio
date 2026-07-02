@@ -77,6 +77,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "betaFeedback", title: "Prepare beta tester feedback", detail: "Export tester instructions, an issue template, triage CSV, schema, and a simple feedback form.", actionTitle: "Export Feedback", priority: 66 + document.geniusSignals["betaFeedback", default: 0]))
         }
 
+        if readinessScore >= 70 || document.geniusSignals["release", default: 0] > 1 {
+            suggestions.append(.init(signal: "supportHandoff", title: "Prepare support handoff", detail: "Export troubleshooting, known issues, rollback steps, and a support manifest for launch handoff.", actionTitle: "Export Support", priority: 65 + document.geniusSignals["supportHandoff", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions
