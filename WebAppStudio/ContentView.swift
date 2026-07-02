@@ -655,6 +655,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    IncidentResponsePackExporter.export(document: document)
+                } label: {
+                    Label("Export Incident Response Pack", systemImage: "exclamationmark.triangle")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

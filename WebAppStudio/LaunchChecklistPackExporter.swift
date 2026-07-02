@@ -115,6 +115,14 @@ enum LaunchChecklistPackExporter {
             try MaintenancePlanPackExporter.backupChecklist(document: document).write(to: maintenanceFolder.appendingPathComponent("backup-checklist.md"), atomically: true, encoding: .utf8)
             try MaintenancePlanPackExporter.ownershipManifestJSON(document: document).write(to: maintenanceFolder.appendingPathComponent("ownership-manifest.json"), atomically: true, encoding: .utf8)
 
+            let incidentFolder = outputURL.appendingPathComponent("Incident Response Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: incidentFolder, withIntermediateDirectories: true)
+            try IncidentResponsePackExporter.responsePlan(document: document).write(to: incidentFolder.appendingPathComponent("INCIDENT_RESPONSE_PLAN.md"), atomically: true, encoding: .utf8)
+            try IncidentResponsePackExporter.incidentLogCSV(document: document).write(to: incidentFolder.appendingPathComponent("incident-log.csv"), atomically: true, encoding: .utf8)
+            try IncidentResponsePackExporter.statusUpdateDrafts(document: document).write(to: incidentFolder.appendingPathComponent("status-update-drafts.txt"), atomically: true, encoding: .utf8)
+            try IncidentResponsePackExporter.evidenceChecklist(document: document).write(to: incidentFolder.appendingPathComponent("evidence-checklist.md"), atomically: true, encoding: .utf8)
+            try IncidentResponsePackExporter.recoveryManifestJSON(document: document).write(to: incidentFolder.appendingPathComponent("recovery-manifest.json"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -167,6 +175,7 @@ enum LaunchChecklistPackExporter {
         - Release Notes Pack/
         - Compliance Review Pack/
         - Maintenance Plan Pack/
+        - Incident Response Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -185,7 +194,8 @@ enum LaunchChecklistPackExporter {
         12. Complete Release Notes Pack/ before announcing the build.
         13. Review Compliance Review Pack/ with privacy, policy, or legal owners when needed.
         14. Share Maintenance Plan Pack/ with whoever will own the app after launch.
-        15. Re-export this pack after any final code or metadata change.
+        15. Share Incident Response Pack/ with support and hosting owners.
+        16. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -232,6 +242,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Release Notes Pack/ to document what changed, what to test, and what to announce.
         - [ ] Use Compliance Review Pack/ to prepare privacy, accessibility, storage, policy, and store review decisions.
         - [ ] Use Maintenance Plan Pack/ to schedule recurring tests, backups, and ownership reviews.
+        - [ ] Use Incident Response Pack/ to prepare outage handling, recovery, evidence, and status updates.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 
