@@ -583,6 +583,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    BrowserCompatibilityPackExporter.export(document: document)
+                } label: {
+                    Label("Export Browser Compatibility Pack", systemImage: "safari")
+                }
+
+                Button {
                     AccessibilityReportExporter.export(document: document)
                 } label: {
                     Label("Export Accessibility Report", systemImage: "accessibility")

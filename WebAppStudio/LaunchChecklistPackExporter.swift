@@ -134,6 +134,9 @@ enum LaunchChecklistPackExporter {
             let projectHandoffFolder = outputURL.appendingPathComponent("Project Handoff Pack", isDirectory: true)
             try ProjectHandoffPackExporter.writePack(document: document, to: projectHandoffFolder)
 
+            let browserFolder = outputURL.appendingPathComponent("Browser Compatibility Pack", isDirectory: true)
+            try BrowserCompatibilityPackExporter.writePack(document: document, to: browserFolder)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -189,6 +192,7 @@ enum LaunchChecklistPackExporter {
         - Incident Response Pack/
         - Design System Pack/
         - Project Handoff Pack/
+        - Browser Compatibility Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -210,7 +214,8 @@ enum LaunchChecklistPackExporter {
         15. Share Incident Response Pack/ with support and hosting owners.
         16. Review Design System Pack/ before final screenshots and UI QA.
         17. Archive Project Handoff Pack/ with the editable project for future changes.
-        18. Re-export this pack after any final code or metadata change.
+        18. Run Browser Compatibility Pack/ across browser engines and legacy web app targets.
+        19. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -260,6 +265,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Incident Response Pack/ to prepare outage handling, recovery, evidence, and status updates.
         - [ ] Use Design System Pack/ to confirm tokens, components, and UI QA match the target device.
         - [ ] Use Project Handoff Pack/ to archive the editable project and future rebuild notes.
+        - [ ] Use Browser Compatibility Pack/ to test browser engines, install flow, offline behavior, and input modes.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

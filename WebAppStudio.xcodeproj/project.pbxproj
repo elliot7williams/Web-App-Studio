@@ -53,6 +53,7 @@
 		1A2B3C4D5E6F70000000020C /* IncidentResponsePackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70000000013F /* IncidentResponsePackExporter.swift */; };
 		1A2B3C4D5E6F70000000020D /* DesignSystemPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000140 /* DesignSystemPackExporter.swift */; };
 		1A2B3C4D5E6F70000000020E /* ProjectHandoffPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000141 /* ProjectHandoffPackExporter.swift */; };
+		1A2B3C4D5E6F70000000020F /* BrowserCompatibilityPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000142 /* BrowserCompatibilityPackExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		1A2B3C4D5E6F70000000013F /* IncidentResponsePackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentResponsePackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000140 /* DesignSystemPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystemPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000141 /* ProjectHandoffPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHandoffPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000142 /* BrowserCompatibilityPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserCompatibilityPackExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				1A2B3C4D5E6F70000000013F /* IncidentResponsePackExporter.swift */,
 				1A2B3C4D5E6F700000000140 /* DesignSystemPackExporter.swift */,
 				1A2B3C4D5E6F700000000141 /* ProjectHandoffPackExporter.swift */,
+				1A2B3C4D5E6F700000000142 /* BrowserCompatibilityPackExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -301,6 +304,7 @@
 				1A2B3C4D5E6F70000000020C /* IncidentResponsePackExporter.swift in Sources */,
 				1A2B3C4D5E6F70000000020D /* DesignSystemPackExporter.swift in Sources */,
 				1A2B3C4D5E6F70000000020E /* ProjectHandoffPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000020F /* BrowserCompatibilityPackExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

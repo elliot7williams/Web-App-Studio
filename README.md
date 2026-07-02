@@ -54,6 +54,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Incident Response Pack export with severity matrix, incident log, evidence checklist, recovery manifest, and status drafts.
 - Design System Pack export with design tokens, CSS variables, component checklist, and UI QA notes.
 - Project Handoff Pack export with editable project source, rebuild instructions, transfer checklist, and metadata.
+- Browser Compatibility Pack export with browser matrix, lab script, install checks, offline checks, and legacy target notes.
 - Genius Mode with local project-aware suggestions that learn from helpful actions over time.
 - Performance budget panel for generated file sizes across constrained, mobile, tablet, and large-screen targets.
 - Web app icon controls that generate exported 192x192 and 512x512 PNG icons.

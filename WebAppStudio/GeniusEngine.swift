@@ -105,6 +105,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "projectHandoff", title: "Archive the editable project", detail: "Export a project handoff pack with the .webappstudio file, rebuild steps, transfer checklist, and metadata.", actionTitle: "Export Project", priority: 58 + document.geniusSignals["projectHandoff", default: 0]))
         }
 
+        if readinessScore >= 55 || document.includeOfflineCache || document.geniusSignals["device", default: 0] > 0 {
+            suggestions.append(.init(signal: "browserCompatibility", title: "Test browser compatibility", detail: "Export a browser matrix for Safari, Chrome, Firefox, Edge, WebView, TV, and legacy web app targets.", actionTitle: "Export Browsers", priority: 57 + document.geniusSignals["browserCompatibility", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions
