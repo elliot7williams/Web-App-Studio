@@ -559,6 +559,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    ProjectHandoffPackExporter.export(document: document)
+                } label: {
+                    Label("Export Project Handoff Pack", systemImage: "folder.badge.person.crop")
+                }
+
+                Button {
                     LaunchChecklistPackExporter.export(document: document, server: server)
                 } label: {
                     Label("Export Launch Checklist Pack", systemImage: "checklist")

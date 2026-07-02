@@ -101,6 +101,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "designSystem", title: "Export design system tokens", detail: "Create color tokens, CSS variables, component QA, and target-device visual checks.", actionTitle: "Export Design", priority: 59 + document.geniusSignals["designSystem", default: 0]))
         }
 
+        if document.geniusSignals["release", default: 0] > 0 || document.geniusSignals["launchPack", default: 0] > 0 {
+            suggestions.append(.init(signal: "projectHandoff", title: "Archive the editable project", detail: "Export a project handoff pack with the .webappstudio file, rebuild steps, transfer checklist, and metadata.", actionTitle: "Export Project", priority: 58 + document.geniusSignals["projectHandoff", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions

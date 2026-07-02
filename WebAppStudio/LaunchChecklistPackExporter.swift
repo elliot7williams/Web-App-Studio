@@ -131,6 +131,9 @@ enum LaunchChecklistPackExporter {
             try DesignSystemPackExporter.componentChecklist(document: document).write(to: designFolder.appendingPathComponent("component-checklist.md"), atomically: true, encoding: .utf8)
             try DesignSystemPackExporter.uiQA(document: document).write(to: designFolder.appendingPathComponent("ui-qa-checklist.md"), atomically: true, encoding: .utf8)
 
+            let projectHandoffFolder = outputURL.appendingPathComponent("Project Handoff Pack", isDirectory: true)
+            try ProjectHandoffPackExporter.writePack(document: document, to: projectHandoffFolder)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -185,6 +188,7 @@ enum LaunchChecklistPackExporter {
         - Maintenance Plan Pack/
         - Incident Response Pack/
         - Design System Pack/
+        - Project Handoff Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -205,7 +209,8 @@ enum LaunchChecklistPackExporter {
         14. Share Maintenance Plan Pack/ with whoever will own the app after launch.
         15. Share Incident Response Pack/ with support and hosting owners.
         16. Review Design System Pack/ before final screenshots and UI QA.
-        17. Re-export this pack after any final code or metadata change.
+        17. Archive Project Handoff Pack/ with the editable project for future changes.
+        18. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -254,6 +259,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Maintenance Plan Pack/ to schedule recurring tests, backups, and ownership reviews.
         - [ ] Use Incident Response Pack/ to prepare outage handling, recovery, evidence, and status updates.
         - [ ] Use Design System Pack/ to confirm tokens, components, and UI QA match the target device.
+        - [ ] Use Project Handoff Pack/ to archive the editable project and future rebuild notes.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 
