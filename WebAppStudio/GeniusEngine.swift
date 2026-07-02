@@ -33,6 +33,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "seoShare", title: "Prepare SEO and share cards", detail: "Export meta tags, robots.txt, sitemap.xml, and structured data before public hosting.", actionTitle: "Export SEO Pack", priority: 78 + document.geniusSignals["seoShare", default: 0]))
         }
 
+        if !document.language.isEmpty || document.geniusSignals["publishing", default: 0] > 0 {
+            suggestions.append(.init(signal: "localization", title: "Prepare localization files", detail: "Export translation templates, localized manifest starters, hreflang tags, and language QA notes.", actionTitle: "Export Locale Pack", priority: 76 + document.geniusSignals["localization", default: 0]))
+        }
+
         if readinessFindings.contains(where: { $0.severity == .error }) {
             suggestions.append(.init(signal: "readiness", title: "Fix launch blockers", detail: "Readiness found blocking issues that can affect installs and exports.", actionTitle: "Open Readiness", priority: 90))
         }

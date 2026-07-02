@@ -57,6 +57,7 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Launch Checklist Pack export that bundles deployment, compatibility, accessibility, privacy, store-review, generated app, and editable project materials for final QA.
 - Security Headers Pack export with Content Security Policy, Permissions-Policy, Netlify `_headers`, Cloudflare headers, Apache `.htaccess`, and nginx snippets.
 - SEO Share Pack export with title/description guidance, Open Graph and Twitter tags, robots.txt, sitemap.xml, and SoftwareApplication JSON-LD.
+- Localization Pack export with translator CSV, string catalog JSON, localized manifest starter, hreflang tags, and multi-language QA checklist.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.

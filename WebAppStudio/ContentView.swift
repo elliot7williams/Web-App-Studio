@@ -607,6 +607,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    LocalizationPackExporter.export(document: document)
+                } label: {
+                    Label("Export Localization Pack", systemImage: "globe.badge.chevron.backward")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

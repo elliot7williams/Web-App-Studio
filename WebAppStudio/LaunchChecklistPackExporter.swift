@@ -53,6 +53,14 @@ enum LaunchChecklistPackExporter {
             try SEOSharePackExporter.sitemap(document: document).write(to: seoFolder.appendingPathComponent("sitemap.xml"), atomically: true, encoding: .utf8)
             try SEOSharePackExporter.structuredData(document: document).write(to: seoFolder.appendingPathComponent("structured-data.json"), atomically: true, encoding: .utf8)
 
+            let localizationFolder = outputURL.appendingPathComponent("Localization Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: localizationFolder, withIntermediateDirectories: true)
+            try LocalizationPackExporter.guide(document: document).write(to: localizationFolder.appendingPathComponent("LOCALIZATION_GUIDE.md"), atomically: true, encoding: .utf8)
+            try LocalizationPackExporter.translationsCSV(document: document).write(to: localizationFolder.appendingPathComponent("translations.csv"), atomically: true, encoding: .utf8)
+            try LocalizationPackExporter.stringsJSON(document: document).write(to: localizationFolder.appendingPathComponent("strings.json"), atomically: true, encoding: .utf8)
+            try LocalizationPackExporter.manifestLocalesJSON(document: document).write(to: localizationFolder.appendingPathComponent("manifest-locales.json"), atomically: true, encoding: .utf8)
+            try LocalizationPackExporter.hreflangTags(document: document).write(to: localizationFolder.appendingPathComponent("hreflang-tags.html"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -97,6 +105,7 @@ enum LaunchChecklistPackExporter {
         - Store Privacy Pack/
         - Security Headers Pack/
         - SEO Share Pack/
+        - Localization Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -107,7 +116,8 @@ enum LaunchChecklistPackExporter {
         4. Use Store Privacy Pack/ when preparing store submission notes.
         5. Review Security Headers Pack/ with the person hosting the app.
         6. Review SEO Share Pack/ before publishing publicly.
-        7. Re-export this pack after any final code or metadata change.
+        7. Review Localization Pack/ before adding languages or store locales.
+        8. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -146,6 +156,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Store Privacy Pack/ for store reviewer notes and privacy disclosure drafts.
         - [ ] Use Security Headers Pack/ to configure CSP and permissions policies on the production host.
         - [ ] Use SEO Share Pack/ for social previews, robots.txt, sitemap.xml, and structured data.
+        - [ ] Use Localization Pack/ for translated manifest, visible copy, and language QA.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 
