@@ -45,6 +45,14 @@ enum LaunchChecklistPackExporter {
             try SecurityHeadersPackExporter.apacheHTAccess(document: document).write(to: securityFolder.appendingPathComponent(".htaccess"), atomically: true, encoding: .utf8)
             try SecurityHeadersPackExporter.nginxSnippet(document: document).write(to: securityFolder.appendingPathComponent("nginx-security-snippet.conf"), atomically: true, encoding: .utf8)
 
+            let seoFolder = outputURL.appendingPathComponent("SEO Share Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: seoFolder, withIntermediateDirectories: true)
+            try SEOSharePackExporter.readme(document: document).write(to: seoFolder.appendingPathComponent("SEO_SHARE_GUIDE.md"), atomically: true, encoding: .utf8)
+            try SEOSharePackExporter.metaTags(document: document).write(to: seoFolder.appendingPathComponent("meta-tags.html"), atomically: true, encoding: .utf8)
+            try SEOSharePackExporter.robots(document: document).write(to: seoFolder.appendingPathComponent("robots.txt"), atomically: true, encoding: .utf8)
+            try SEOSharePackExporter.sitemap(document: document).write(to: seoFolder.appendingPathComponent("sitemap.xml"), atomically: true, encoding: .utf8)
+            try SEOSharePackExporter.structuredData(document: document).write(to: seoFolder.appendingPathComponent("structured-data.json"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -88,6 +96,7 @@ enum LaunchChecklistPackExporter {
         - PRIVACY_PERMISSIONS.md
         - Store Privacy Pack/
         - Security Headers Pack/
+        - SEO Share Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -97,7 +106,8 @@ enum LaunchChecklistPackExporter {
         3. Review accessibility, privacy, device compatibility, and performance reports.
         4. Use Store Privacy Pack/ when preparing store submission notes.
         5. Review Security Headers Pack/ with the person hosting the app.
-        6. Re-export this pack after any final code or metadata change.
+        6. Review SEO Share Pack/ before publishing publicly.
+        7. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -135,6 +145,7 @@ enum LaunchChecklistPackExporter {
         - [ ] Review DEPLOYMENT_REPORT.md with the person hosting or testing the app.
         - [ ] Use Store Privacy Pack/ for store reviewer notes and privacy disclosure drafts.
         - [ ] Use Security Headers Pack/ to configure CSP and permissions policies on the production host.
+        - [ ] Use SEO Share Pack/ for social previews, robots.txt, sitemap.xml, and structured data.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

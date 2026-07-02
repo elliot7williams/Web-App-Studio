@@ -29,6 +29,10 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "securityHeaders", title: "Prepare hosting security headers", detail: "Generate CSP, Permissions-Policy, and host-specific header drafts before publishing.", actionTitle: "Export Headers", priority: 84 + document.geniusSignals["securityHeaders", default: 0]))
         }
 
+        if document.geniusSignals["publishing", default: 0] > 0 || !document.parsedCategories.isEmpty {
+            suggestions.append(.init(signal: "seoShare", title: "Prepare SEO and share cards", detail: "Export meta tags, robots.txt, sitemap.xml, and structured data before public hosting.", actionTitle: "Export SEO Pack", priority: 78 + document.geniusSignals["seoShare", default: 0]))
+        }
+
         if readinessFindings.contains(where: { $0.severity == .error }) {
             suggestions.append(.init(signal: "readiness", title: "Fix launch blockers", detail: "Readiness found blocking issues that can affect installs and exports.", actionTitle: "Open Readiness", priority: 90))
         }

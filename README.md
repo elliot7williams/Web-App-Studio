@@ -42,6 +42,7 @@ Open `WebAppStudio.xcodeproj`, select the `WebAppStudio` scheme, then run it on 
 - Store Privacy Pack export with disclosure drafts, permission rationales, reviewer notes, and JSON questionnaire data.
 - Launch Checklist Pack export that bundles QA, deployment, compatibility, accessibility, privacy, and store-review materials.
 - Security Headers Pack export with CSP, Permissions-Policy, and Netlify, Cloudflare, Apache, and nginx examples.
+- SEO Share Pack export with meta tags, Open Graph/Twitter tags, robots.txt, sitemap.xml, and structured data drafts.
 - Genius Mode with local project-aware suggestions that learn from helpful actions over time.
 - Performance budget panel for generated file sizes across constrained, mobile, tablet, and large-screen targets.
 - Web app icon controls that generate exported 192x192 and 512x512 PNG icons.

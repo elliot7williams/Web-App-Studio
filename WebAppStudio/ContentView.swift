@@ -601,6 +601,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    SEOSharePackExporter.export(document: document)
+                } label: {
+                    Label("Export SEO Share Pack", systemImage: "link")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")
