@@ -48,6 +48,8 @@
 		1A2B3C4D5E6F700000000207 /* BetaFeedbackPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70000000013A /* BetaFeedbackPackExporter.swift */; };
 		1A2B3C4D5E6F700000000208 /* SupportHandoffPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70000000013B /* SupportHandoffPackExporter.swift */; };
 		1A2B3C4D5E6F700000000209 /* ReleaseNotesPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70000000013C /* ReleaseNotesPackExporter.swift */; };
+		1A2B3C4D5E6F70000000020A /* ComplianceReviewPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70000000013D /* ComplianceReviewPackExporter.swift */; };
+		1A2B3C4D5E6F70000000020B /* MaintenancePlanPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70000000013E /* MaintenancePlanPackExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		1A2B3C4D5E6F70000000013A /* BetaFeedbackPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaFeedbackPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F70000000013B /* SupportHandoffPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportHandoffPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F70000000013C /* ReleaseNotesPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotesPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F70000000013D /* ComplianceReviewPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplianceReviewPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F70000000013E /* MaintenancePlanPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenancePlanPackExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,8 @@
 				1A2B3C4D5E6F70000000013A /* BetaFeedbackPackExporter.swift */,
 				1A2B3C4D5E6F70000000013B /* SupportHandoffPackExporter.swift */,
 				1A2B3C4D5E6F70000000013C /* ReleaseNotesPackExporter.swift */,
+				1A2B3C4D5E6F70000000013D /* ComplianceReviewPackExporter.swift */,
+				1A2B3C4D5E6F70000000013E /* MaintenancePlanPackExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -281,6 +287,8 @@
 				1A2B3C4D5E6F700000000207 /* BetaFeedbackPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000208 /* SupportHandoffPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000209 /* ReleaseNotesPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000020A /* ComplianceReviewPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000020B /* MaintenancePlanPackExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

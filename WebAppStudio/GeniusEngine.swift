@@ -85,6 +85,14 @@ enum GeniusEngine {
             suggestions.append(.init(signal: "releaseNotes", title: "Draft release notes", detail: "Export user-facing notes, a changelog, QA delta checklist, announcement copy, and version manifest.", actionTitle: "Export Notes", priority: 64 + document.geniusSignals["releaseNotes", default: 0]))
         }
 
+        if privacyFindings.contains(where: { $0.level == .high || $0.capability == "Network Requests" }) || accessibilityFindings.contains(where: { $0.severity == .fix }) || document.geniusSignals["release", default: 0] > 0 {
+            suggestions.append(.init(signal: "complianceReview", title: "Prepare compliance review", detail: "Export privacy, accessibility, storage, consent, policy, and reviewer question checklists.", actionTitle: "Export Compliance", priority: 63 + document.geniusSignals["complianceReview", default: 0]))
+        }
+
+        if readinessScore >= 75 || document.geniusSignals["release", default: 0] > 1 {
+            suggestions.append(.init(signal: "maintenancePlan", title: "Plan post-launch maintenance", detail: "Export recurring checks, browser drift review, backup checklist, and ownership manifest.", actionTitle: "Export Maintenance", priority: 61 + document.geniusSignals["maintenancePlan", default: 0]))
+        }
+
         suggestions.append(.init(signal: "network", title: "Test on real hardware", detail: "Start the Network Test server and scan the QR code from a same-Wi-Fi device.", actionTitle: "Open Network Test", priority: 55 + document.geniusSignals["network", default: 0]))
 
         return suggestions

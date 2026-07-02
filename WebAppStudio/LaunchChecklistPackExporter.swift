@@ -99,6 +99,22 @@ enum LaunchChecklistPackExporter {
             try ReleaseNotesPackExporter.announcementCopy(document: document).write(to: releaseFolder.appendingPathComponent("announcement-copy.txt"), atomically: true, encoding: .utf8)
             try ReleaseNotesPackExporter.versionManifestJSON(document: document).write(to: releaseFolder.appendingPathComponent("version-manifest.json"), atomically: true, encoding: .utf8)
 
+            let complianceFolder = outputURL.appendingPathComponent("Compliance Review Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: complianceFolder, withIntermediateDirectories: true)
+            try ComplianceReviewPackExporter.complianceGuide(document: document).write(to: complianceFolder.appendingPathComponent("COMPLIANCE_REVIEW.md"), atomically: true, encoding: .utf8)
+            try ComplianceReviewPackExporter.policyChecklistCSV(document: document).write(to: complianceFolder.appendingPathComponent("policy-checklist.csv"), atomically: true, encoding: .utf8)
+            try ComplianceReviewPackExporter.dataInventoryJSON(document: document).write(to: complianceFolder.appendingPathComponent("data-inventory.json"), atomically: true, encoding: .utf8)
+            try ComplianceReviewPackExporter.consentCopyDraft(document: document).write(to: complianceFolder.appendingPathComponent("consent-copy-draft.txt"), atomically: true, encoding: .utf8)
+            try ComplianceReviewPackExporter.reviewerQuestions(document: document).write(to: complianceFolder.appendingPathComponent("reviewer-questions.md"), atomically: true, encoding: .utf8)
+
+            let maintenanceFolder = outputURL.appendingPathComponent("Maintenance Plan Pack", isDirectory: true)
+            try FileManager.default.createDirectory(at: maintenanceFolder, withIntermediateDirectories: true)
+            try MaintenancePlanPackExporter.maintenancePlan(document: document).write(to: maintenanceFolder.appendingPathComponent("MAINTENANCE_PLAN.md"), atomically: true, encoding: .utf8)
+            try MaintenancePlanPackExporter.maintenanceCalendarCSV(document: document).write(to: maintenanceFolder.appendingPathComponent("maintenance-calendar.csv"), atomically: true, encoding: .utf8)
+            try MaintenancePlanPackExporter.browserDriftChecklist(document: document).write(to: maintenanceFolder.appendingPathComponent("browser-drift-checklist.md"), atomically: true, encoding: .utf8)
+            try MaintenancePlanPackExporter.backupChecklist(document: document).write(to: maintenanceFolder.appendingPathComponent("backup-checklist.md"), atomically: true, encoding: .utf8)
+            try MaintenancePlanPackExporter.ownershipManifestJSON(document: document).write(to: maintenanceFolder.appendingPathComponent("ownership-manifest.json"), atomically: true, encoding: .utf8)
+
             if server.isRunning, !server.scanURLString.isEmpty {
                 try QRCodeRenderer.pngData(for: server.scanURLString, size: 512)
                     .write(to: outputURL.appendingPathComponent("DEVICE_TEST_QR.png"), options: .atomic)
@@ -149,6 +165,8 @@ enum LaunchChecklistPackExporter {
         - Beta Feedback Pack/
         - Support Handoff Pack/
         - Release Notes Pack/
+        - Compliance Review Pack/
+        - Maintenance Plan Pack/
         - DEVICE_TEST_QR.png when the local server is running
 
         ## Recommended Review Order
@@ -165,7 +183,9 @@ enum LaunchChecklistPackExporter {
         10. Share Beta Feedback Pack/ with testers before wider release.
         11. Share Support Handoff Pack/ with whoever will support the app after launch.
         12. Complete Release Notes Pack/ before announcing the build.
-        13. Re-export this pack after any final code or metadata change.
+        13. Review Compliance Review Pack/ with privacy, policy, or legal owners when needed.
+        14. Share Maintenance Plan Pack/ with whoever will own the app after launch.
+        15. Re-export this pack after any final code or metadata change.
         """
     }
 
@@ -210,6 +230,8 @@ enum LaunchChecklistPackExporter {
         - [ ] Use Beta Feedback Pack/ to collect tester issues, device details, and launch notes.
         - [ ] Use Support Handoff Pack/ to prepare troubleshooting, known issues, and rollback notes.
         - [ ] Use Release Notes Pack/ to document what changed, what to test, and what to announce.
+        - [ ] Use Compliance Review Pack/ to prepare privacy, accessibility, storage, policy, and store review decisions.
+        - [ ] Use Maintenance Plan Pack/ to schedule recurring tests, backups, and ownership reviews.
         - [ ] Export final screenshots after the last visual change.
         - [ ] Re-export this launch pack after any final fix.
 

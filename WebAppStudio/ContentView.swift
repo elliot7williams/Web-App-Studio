@@ -643,6 +643,18 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    ComplianceReviewPackExporter.export(document: document)
+                } label: {
+                    Label("Export Compliance Review Pack", systemImage: "checkmark.seal")
+                }
+
+                Button {
+                    MaintenancePlanPackExporter.export(document: document)
+                } label: {
+                    Label("Export Maintenance Plan Pack", systemImage: "calendar.badge.clock")
+                }
+
+                Button {
                     AppStoreScreenshotPackExporter.export(document: document)
                 } label: {
                     Label("Export Screenshot Pack", systemImage: "photo.on.rectangle.angled")

@@ -63,6 +63,8 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Beta Feedback Pack export with tester instructions, issue template, feedback triage CSV, JSON schema, and static HTML form.
 - Support Handoff Pack export with support guide, troubleshooting runbook, rollback plan, known-issues CSV, and support manifest JSON.
 - Release Notes Pack export with release notes, changelog, QA delta checklist, announcement copy, and version manifest JSON.
+- Compliance Review Pack export with privacy, accessibility, storage, consent, policy, and store review checklists.
+- Maintenance Plan Pack export with maintenance calendar, browser drift checklist, backup checklist, and ownership manifest JSON.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.
