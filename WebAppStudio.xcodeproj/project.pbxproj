@@ -58,6 +58,18 @@
 		1A2B3C4D5E6F700000000211 /* InstallabilityAuditPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000144 /* InstallabilityAuditPackExporter.swift */; };
 		1A2B3C4D5E6F700000000212 /* QATestPlanPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000145 /* QATestPlanPackExporter.swift */; };
 		1A2B3C4D5E6F700000000213 /* RollbackSnapshotPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000146 /* RollbackSnapshotPackExporter.swift */; };
+		1A2B3C4D5E6F700000000214 /* PerformanceSpeedEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000147 /* PerformanceSpeedEstimator.swift */; };
+		1A2B3C4D5E6F700000000215 /* DeviceLabReportExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000148 /* DeviceLabReportExporter.swift */; };
+		1A2B3C4D5E6F700000000216 /* LaunchRiskRadarExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000149 /* LaunchRiskRadarExporter.swift */; };
+		1A2B3C4D5E6F700000000217 /* OfflineResiliencePackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000150 /* OfflineResiliencePackExporter.swift */; };
+		1A2B3C4D5E6F700000000218 /* ReleaseEvidenceVaultExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000151 /* ReleaseEvidenceVaultExporter.swift */; };
+		1A2B3C4D5E6F700000000219 /* ThirdPartyInventoryPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000152 /* ThirdPartyInventoryPackExporter.swift */; };
+		1A2B3C4D5E6F70000000021A /* SecretsTokenAuditPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000153 /* SecretsTokenAuditPackExporter.swift */; };
+		1A2B3C4D5E6F70000000021B /* ContentPolicyAgeRatingPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000154 /* ContentPolicyAgeRatingPackExporter.swift */; };
+		1A2B3C4D5E6F70000000021C /* StorageRetentionPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000155 /* StorageRetentionPackExporter.swift */; };
+		1A2B3C4D5E6F70000000021D /* WebAPIDeviceMatrixPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000156 /* WebAPIDeviceMatrixPackExporter.swift */; };
+		1A2B3C4D5E6F70000000021E /* UserGuideOnboardingPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000157 /* UserGuideOnboardingPackExporter.swift */; };
+		1A2B3C4D5E6F70000000021F /* ObservabilityErrorLoggingPackExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F700000000158 /* ObservabilityErrorLoggingPackExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +126,18 @@
 		1A2B3C4D5E6F700000000144 /* InstallabilityAuditPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallabilityAuditPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000145 /* QATestPlanPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QATestPlanPackExporter.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F700000000146 /* RollbackSnapshotPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollbackSnapshotPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000147 /* PerformanceSpeedEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSpeedEstimator.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000148 /* DeviceLabReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLabReportExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000149 /* LaunchRiskRadarExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRiskRadarExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000150 /* OfflineResiliencePackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineResiliencePackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000151 /* ReleaseEvidenceVaultExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseEvidenceVaultExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000152 /* ThirdPartyInventoryPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyInventoryPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000153 /* SecretsTokenAuditPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsTokenAuditPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000154 /* ContentPolicyAgeRatingPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPolicyAgeRatingPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000155 /* StorageRetentionPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRetentionPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000156 /* WebAPIDeviceMatrixPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPIDeviceMatrixPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000157 /* UserGuideOnboardingPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideOnboardingPackExporter.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F700000000158 /* ObservabilityErrorLoggingPackExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservabilityErrorLoggingPackExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +212,18 @@
 				1A2B3C4D5E6F700000000144 /* InstallabilityAuditPackExporter.swift */,
 				1A2B3C4D5E6F700000000145 /* QATestPlanPackExporter.swift */,
 				1A2B3C4D5E6F700000000146 /* RollbackSnapshotPackExporter.swift */,
+				1A2B3C4D5E6F700000000147 /* PerformanceSpeedEstimator.swift */,
+				1A2B3C4D5E6F700000000148 /* DeviceLabReportExporter.swift */,
+				1A2B3C4D5E6F700000000149 /* LaunchRiskRadarExporter.swift */,
+				1A2B3C4D5E6F700000000150 /* OfflineResiliencePackExporter.swift */,
+				1A2B3C4D5E6F700000000151 /* ReleaseEvidenceVaultExporter.swift */,
+				1A2B3C4D5E6F700000000152 /* ThirdPartyInventoryPackExporter.swift */,
+				1A2B3C4D5E6F700000000153 /* SecretsTokenAuditPackExporter.swift */,
+				1A2B3C4D5E6F700000000154 /* ContentPolicyAgeRatingPackExporter.swift */,
+				1A2B3C4D5E6F700000000155 /* StorageRetentionPackExporter.swift */,
+				1A2B3C4D5E6F700000000156 /* WebAPIDeviceMatrixPackExporter.swift */,
+				1A2B3C4D5E6F700000000157 /* UserGuideOnboardingPackExporter.swift */,
+				1A2B3C4D5E6F700000000158 /* ObservabilityErrorLoggingPackExporter.swift */,
 				1A2B3C4D5E6F700000000107 /* Assets.xcassets */,
 				1A2B3C4D5E6F700000000108 /* Info.plist */,
 			);
@@ -321,6 +357,18 @@
 				1A2B3C4D5E6F700000000211 /* InstallabilityAuditPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000212 /* QATestPlanPackExporter.swift in Sources */,
 				1A2B3C4D5E6F700000000213 /* RollbackSnapshotPackExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000214 /* PerformanceSpeedEstimator.swift in Sources */,
+				1A2B3C4D5E6F700000000215 /* DeviceLabReportExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000216 /* LaunchRiskRadarExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000217 /* OfflineResiliencePackExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000218 /* ReleaseEvidenceVaultExporter.swift in Sources */,
+				1A2B3C4D5E6F700000000219 /* ThirdPartyInventoryPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000021A /* SecretsTokenAuditPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000021B /* ContentPolicyAgeRatingPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000021C /* StorageRetentionPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000021D /* WebAPIDeviceMatrixPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000021E /* UserGuideOnboardingPackExporter.swift in Sources */,
+				1A2B3C4D5E6F70000000021F /* ObservabilityErrorLoggingPackExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,17 +495,29 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TWHE8V8GUK;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WebAppStudio/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.WebAppStudio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwilliams.WebAppStudio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -472,17 +532,29 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TWHE8V8GUK;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WebAppStudio/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.WebAppStudio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwilliams.WebAppStudio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

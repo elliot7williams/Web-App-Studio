@@ -37,6 +37,15 @@ enum LaunchChecklistPackExporter {
             try StorePrivacyPackExporter.reviewerNotes(document: document).write(to: storeFolder.appendingPathComponent("reviewer-notes.md"), atomically: true, encoding: .utf8)
             try StorePrivacyPackExporter.questionnaireJSON(document: document).write(to: storeFolder.appendingPathComponent("privacy-questionnaire.json"), options: [.atomic])
 
+            let thirdPartyFolder = outputURL.appendingPathComponent("Third-Party Inventory Pack", isDirectory: true)
+            try ThirdPartyInventoryPackExporter.writePack(document: document, to: thirdPartyFolder)
+
+            let secretsFolder = outputURL.appendingPathComponent("Secrets Token Audit Pack", isDirectory: true)
+            try SecretsTokenAuditPackExporter.writePack(document: document, to: secretsFolder)
+
+            let storageFolder = outputURL.appendingPathComponent("Storage Retention Pack", isDirectory: true)
+            try StorageRetentionPackExporter.writePack(document: document, to: storageFolder)
+
             let securityFolder = outputURL.appendingPathComponent("Security Headers Pack", isDirectory: true)
             try FileManager.default.createDirectory(at: securityFolder, withIntermediateDirectories: true)
             try SecurityHeadersPackExporter.readme(document: document).write(to: securityFolder.appendingPathComponent("SECURITY_HEADERS.md"), atomically: true, encoding: .utf8)
@@ -75,6 +84,9 @@ enum LaunchChecklistPackExporter {
             try PerformanceBudgetPackExporter.testPlan(document: document).write(to: performanceFolder.appendingPathComponent("performance-test-plan.md"), atomically: true, encoding: .utf8)
             try PerformanceBudgetPackExporter.runtimeChecklistJSON(document: document).write(to: performanceFolder.appendingPathComponent("runtime-checklist.json"), atomically: true, encoding: .utf8)
 
+            let offlineFolder = outputURL.appendingPathComponent("Offline Resilience Pack", isDirectory: true)
+            try OfflineResiliencePackExporter.writePack(document: document, to: offlineFolder)
+
             let feedbackFolder = outputURL.appendingPathComponent("Beta Feedback Pack", isDirectory: true)
             try FileManager.default.createDirectory(at: feedbackFolder, withIntermediateDirectories: true)
             try BetaFeedbackPackExporter.testerGuide(document: document).write(to: feedbackFolder.appendingPathComponent("BETA_TESTER_GUIDE.md"), atomically: true, encoding: .utf8)
@@ -98,6 +110,12 @@ enum LaunchChecklistPackExporter {
             try ReleaseNotesPackExporter.qaDeltaChecklist(document: document).write(to: releaseFolder.appendingPathComponent("qa-delta-checklist.md"), atomically: true, encoding: .utf8)
             try ReleaseNotesPackExporter.announcementCopy(document: document).write(to: releaseFolder.appendingPathComponent("announcement-copy.txt"), atomically: true, encoding: .utf8)
             try ReleaseNotesPackExporter.versionManifestJSON(document: document).write(to: releaseFolder.appendingPathComponent("version-manifest.json"), atomically: true, encoding: .utf8)
+
+            let evidenceFolder = outputURL.appendingPathComponent("Release Evidence Vault", isDirectory: true)
+            try ReleaseEvidenceVaultExporter.writeVault(document: document, server: server, to: evidenceFolder)
+
+            let contentPolicyFolder = outputURL.appendingPathComponent("Content Policy Age Rating Pack", isDirectory: true)
+            try ContentPolicyAgeRatingPackExporter.writePack(document: document, to: contentPolicyFolder)
 
             let complianceFolder = outputURL.appendingPathComponent("Compliance Review Pack", isDirectory: true)
             try FileManager.default.createDirectory(at: complianceFolder, withIntermediateDirectories: true)
@@ -136,6 +154,15 @@ enum LaunchChecklistPackExporter {
 
             let browserFolder = outputURL.appendingPathComponent("Browser Compatibility Pack", isDirectory: true)
             try BrowserCompatibilityPackExporter.writePack(document: document, to: browserFolder)
+
+            let apiMatrixFolder = outputURL.appendingPathComponent("Web API Device Matrix Pack", isDirectory: true)
+            try WebAPIDeviceMatrixPackExporter.writePack(document: document, to: apiMatrixFolder)
+
+            let userGuideFolder = outputURL.appendingPathComponent("User Guide Onboarding Pack", isDirectory: true)
+            try UserGuideOnboardingPackExporter.writePack(document: document, to: userGuideFolder)
+
+            let observabilityFolder = outputURL.appendingPathComponent("Observability Error Logging Pack", isDirectory: true)
+            try ObservabilityErrorLoggingPackExporter.writePack(document: document, to: observabilityFolder)
 
             let hostFolder = outputURL.appendingPathComponent("Host Deployment Pack", isDirectory: true)
             try HostDeploymentPackExporter.writePack(document: document, to: hostFolder)

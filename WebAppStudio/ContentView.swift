@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var isShowingAccessibility = false
     @State private var isShowingPrivacy = false
     @State private var isShowingPerformance = false
+    @State private var isShowingReleaseDashboard = false
     @State private var isShowingDeploy = false
     @State private var isShowingPublish = false
     @State private var isShowingReleaseManager = false
@@ -106,6 +107,12 @@ struct ContentView: View {
                     }
 
                     Button {
+                        isShowingReleaseDashboard = true
+                    } label: {
+                        Label("Dashboard", systemImage: "rectangle.grid.2x2")
+                    }
+
+                    Button {
                         isShowingDeploy = true
                     } label: {
                         Label("Deploy", systemImage: "paperplane")
@@ -183,6 +190,11 @@ struct ContentView: View {
             .sheet(isPresented: $isShowingPerformance) {
                 PerformancePanel(isPresented: $isShowingPerformance)
                     .environmentObject(document)
+            }
+            .sheet(isPresented: $isShowingReleaseDashboard) {
+                ReleaseDashboardPanel(isPresented: $isShowingReleaseDashboard)
+                    .environmentObject(document)
+                    .environmentObject(server)
             }
             .sheet(isPresented: $isShowingDeploy) {
                 DeployPanel(isPresented: $isShowingDeploy, autoRefreshServer: $autoRefreshServer)
@@ -571,6 +583,12 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    LaunchRiskRadarExporter.export(document: document)
+                } label: {
+                    Label("Export Launch Risk Radar", systemImage: "radar")
+                }
+
+                Button {
                     DeploymentReportExporter.export(document: document, server: server)
                 } label: {
                     Label("Export Deployment Report", systemImage: "doc.text.magnifyingglass")
@@ -583,9 +601,33 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    DeviceLabReportExporter.export(document: document, server: server)
+                } label: {
+                    Label("Export Device Lab Report", systemImage: "iphone.sizes")
+                }
+
+                Button {
                     BrowserCompatibilityPackExporter.export(document: document)
                 } label: {
                     Label("Export Browser Compatibility Pack", systemImage: "safari")
+                }
+
+                Button {
+                    WebAPIDeviceMatrixPackExporter.export(document: document)
+                } label: {
+                    Label("Export Web API Device Matrix Pack", systemImage: "cpu")
+                }
+
+                Button {
+                    UserGuideOnboardingPackExporter.export(document: document)
+                } label: {
+                    Label("Export User Guide Pack", systemImage: "questionmark.circle")
+                }
+
+                Button {
+                    ObservabilityErrorLoggingPackExporter.export(document: document)
+                } label: {
+                    Label("Export Observability Pack", systemImage: "waveform.path.ecg")
                 }
 
                 Button {
@@ -607,6 +649,24 @@ private struct Sidebar: View {
                 }
 
                 Button {
+                    ThirdPartyInventoryPackExporter.export(document: document)
+                } label: {
+                    Label("Export Third-Party Inventory Pack", systemImage: "link.badge.plus")
+                }
+
+                Button {
+                    SecretsTokenAuditPackExporter.export(document: document)
+                } label: {
+                    Label("Export Secrets Token Audit Pack", systemImage: "key")
+                }
+
+                Button {
+                    StorageRetentionPackExporter.export(document: document)
+                } label: {
+                    Label("Export Storage Retention Pack", systemImage: "externaldrive.badge.timemachine")
+                }
+
+                Button {
                     SecurityHeadersPackExporter.export(document: document)
                 } label: {
                     Label("Export Security Headers Pack", systemImage: "lock.shield")
@@ -622,6 +682,12 @@ private struct Sidebar: View {
                     InstallabilityAuditPackExporter.export(document: document)
                 } label: {
                     Label("Export Installability Audit Pack", systemImage: "app.badge.checkmark")
+                }
+
+                Button {
+                    OfflineResiliencePackExporter.export(document: document)
+                } label: {
+                    Label("Export Offline Resilience Pack", systemImage: "wifi.slash")
                 }
 
                 Button {
@@ -676,6 +742,18 @@ private struct Sidebar: View {
                     ReleaseNotesPackExporter.export(document: document)
                 } label: {
                     Label("Export Release Notes Pack", systemImage: "newspaper")
+                }
+
+                Button {
+                    ReleaseEvidenceVaultExporter.export(document: document, server: server)
+                } label: {
+                    Label("Export Release Evidence Vault", systemImage: "folder.badge.shield")
+                }
+
+                Button {
+                    ContentPolicyAgeRatingPackExporter.export(document: document)
+                } label: {
+                    Label("Export Content Policy Pack", systemImage: "person.crop.circle.badge.exclamationmark")
                 }
 
                 Button {
@@ -1014,6 +1092,237 @@ private struct PrivacyPermissionSummary: View {
         case "High": return .red
         case "Review": return .orange
         default: return .green
+        }
+    }
+}
+
+private struct ReleaseDashboardPanel: View {
+    @EnvironmentObject private var document: WebAppDocument
+    @EnvironmentObject private var server: LocalPreviewServer
+    @Binding var isPresented: Bool
+
+    private var readinessFindings: [ReadinessFinding] { ReadinessChecker.findings(for: document) }
+    private var accessibilityFindings: [AccessibilityFinding] { AccessibilityChecker.findings(for: document) }
+    private var privacyFindings: [PrivacyPermissionFinding] { PrivacyPermissionChecker.findings(for: document) }
+    private var performance: PerformanceReport { PerformanceBudgetChecker.report(for: document) }
+    private var speedSummary: SpeedSummary { PerformanceSpeedEstimator.summary(for: document) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Release Dashboard")
+                        .font(.title2.weight(.semibold))
+                    Text("\(document.appName) for \(document.selectedProfile.name)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+                    LaunchChecklistPackExporter.export(document: document, server: server)
+                } label: {
+                    Label("Export Launch Pack", systemImage: "checklist")
+                }
+
+                Button {
+                    isPresented = false
+                } label: {
+                    Label("Close", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .padding(20)
+
+            Divider()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    HStack(spacing: 12) {
+                        ReadinessMetric(title: "Launch", value: launchState, color: launchColor)
+                        ReadinessMetric(title: "Readiness", value: "\(ReadinessChecker.score(for: readinessFindings))%", color: scoreColor(ReadinessChecker.score(for: readinessFindings)))
+                        ReadinessMetric(title: "Access", value: "\(AccessibilityChecker.score(for: accessibilityFindings))%", color: scoreColor(AccessibilityChecker.score(for: accessibilityFindings)))
+                        ReadinessMetric(title: "Speed", value: speedSummary.slowest.map { PerformanceSpeedEstimator.formattedSeconds($0.totalSeconds) } ?? "--", color: speedColor(speedSummary.slowest?.status ?? .fast))
+                    }
+
+                    HStack(spacing: 12) {
+                        ReadinessMetric(title: "Privacy", value: PrivacyPermissionChecker.riskLabel(for: privacyFindings), color: privacyColor)
+                        ReadinessMetric(title: "Perf", value: performance.status.title, color: performanceColor)
+                        ReadinessMetric(title: "Size", value: PerformanceBudgetChecker.formattedBytes(performance.totalBytes), color: performanceColor)
+                        ReadinessMetric(title: "Server", value: server.isRunning ? "Live" : "Off", color: server.isRunning ? .green : .secondary)
+                    }
+
+                    DashboardSection(title: "Speed Test Estimate", systemImage: "speedometer") {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Estimated first-load time combines generated asset transfer, device boot cost, and network latency. Use real-device testing for final sign-off.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            ForEach(speedSummary.estimates) { estimate in
+                                HStack(spacing: 12) {
+                                    Label(estimate.name, systemImage: "network")
+                                        .frame(width: 130, alignment: .leading)
+                                    ProgressView(value: min(estimate.totalSeconds / 4.0, 1.0))
+                                        .tint(speedColor(estimate.status))
+                                    Text(PerformanceSpeedEstimator.formattedSeconds(estimate.totalSeconds))
+                                        .font(.body.monospacedDigit())
+                                        .frame(width: 64, alignment: .trailing)
+                                    Text(estimate.status.title)
+                                        .foregroundStyle(speedColor(estimate.status))
+                                        .frame(width: 58, alignment: .leading)
+                                }
+                            }
+                        }
+                    }
+
+                    DashboardSection(title: "Recommended Actions", systemImage: "bolt") {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 190), spacing: 10)], spacing: 10) {
+                            DashboardAction(title: "Launch Pack", systemImage: "checklist") {
+                                LaunchChecklistPackExporter.export(document: document, server: server)
+                            }
+                            DashboardAction(title: "Risk Radar", systemImage: "radar") {
+                                LaunchRiskRadarExporter.export(document: document)
+                            }
+                            DashboardAction(title: "QA Test Plan", systemImage: "checkmark.rectangle.stack") {
+                                QATestPlanPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Speed Budget", systemImage: "speedometer") {
+                                PerformanceBudgetPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Device Lab", systemImage: "iphone.sizes") {
+                                DeviceLabReportExporter.export(document: document, server: server)
+                            }
+                            DashboardAction(title: "API Matrix", systemImage: "cpu") {
+                                WebAPIDeviceMatrixPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "User Guide", systemImage: "questionmark.circle") {
+                                UserGuideOnboardingPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Observe", systemImage: "waveform.path.ecg") {
+                                ObservabilityErrorLoggingPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Install Audit", systemImage: "app.badge.checkmark") {
+                                InstallabilityAuditPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Offline QA", systemImage: "wifi.slash") {
+                                OfflineResiliencePackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Evidence", systemImage: "folder.badge.shield") {
+                                ReleaseEvidenceVaultExporter.export(document: document, server: server)
+                            }
+                            DashboardAction(title: "Inventory", systemImage: "link.badge.plus") {
+                                ThirdPartyInventoryPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Secrets", systemImage: "key") {
+                                SecretsTokenAuditPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Storage", systemImage: "externaldrive.badge.timemachine") {
+                                StorageRetentionPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Content", systemImage: "person.crop.circle.badge.exclamationmark") {
+                                ContentPolicyAgeRatingPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Host Deploy", systemImage: "server.rack") {
+                                HostDeploymentPackExporter.export(document: document)
+                            }
+                            DashboardAction(title: "Rollback", systemImage: "arrow.uturn.backward.square") {
+                                RollbackSnapshotPackExporter.export(document: document)
+                            }
+                        }
+                    }
+                }
+                .padding(20)
+            }
+        }
+        .frame(minWidth: 760, minHeight: 620)
+    }
+
+    private var launchState: String {
+        if readinessFindings.contains(where: { $0.severity == .error }) || accessibilityFindings.contains(where: { $0.severity == .fix }) || performance.status == .over {
+            return "Blocked"
+        }
+        if readinessFindings.contains(where: { $0.severity == .warning }) || speedSummary.reviewCount > 0 || PrivacyPermissionChecker.riskLabel(for: privacyFindings) != "Low" {
+            return "Review"
+        }
+        return "Ready"
+    }
+
+    private var launchColor: Color {
+        switch launchState {
+        case "Ready": return .green
+        case "Review": return .orange
+        default: return .red
+        }
+    }
+
+    private var performanceColor: Color {
+        switch performance.status {
+        case .good: return .green
+        case .tight: return .orange
+        case .over: return .red
+        }
+    }
+
+    private var privacyColor: Color {
+        switch PrivacyPermissionChecker.riskLabel(for: privacyFindings) {
+        case "High": return .red
+        case "Review": return .orange
+        default: return .green
+        }
+    }
+
+    private func scoreColor(_ score: Int) -> Color {
+        if score >= 85 { return .green }
+        if score >= 65 { return .orange }
+        return .red
+    }
+
+    private func speedColor(_ status: SpeedStatus) -> Color {
+        switch status {
+        case .fast: return .green
+        case .review: return .orange
+        case .slow: return .red
+        }
+    }
+}
+
+private struct DashboardSection<Content: View>: View {
+    let title: String
+    let systemImage: String
+    let content: Content
+
+    init(title: String, systemImage: String, @ViewBuilder content: () -> Content) {
+        self.title = title
+        self.systemImage = systemImage
+        self.content = content()
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Label(title, systemImage: systemImage)
+                .font(.headline)
+            content
+        }
+        .padding(14)
+        .background(Color(nsColor: .controlBackgroundColor))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(nsColor: .separatorColor))
+        }
+    }
+}
+
+private struct DashboardAction: View {
+    let title: String
+    let systemImage: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Label(title, systemImage: systemImage)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }

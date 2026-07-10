@@ -11,6 +11,7 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Export generated web app folders and ZIP packages.
 - Export complete handoff bundles with project source, generated files, App Store notes, deployment reports, and QR assets.
 - Export Launch Checklist Packs with generated files, project source, launch index, QA checklist, major reports, store privacy materials, and optional QR assets.
+- Export Launch Risk Radar Packs with prioritized risk register, launch score, markdown report, CSV, and JSON.
 
 ## Templates, Starter Packs, And Snippets
 
@@ -25,6 +26,10 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Built-in profiles for Firefox OS-style phones, KaiOS candybar phones, compact wearables, phone PWAs, tablets, TV browsers, and desktop PWAs.
 - Custom device profiles with dimensions, family, user agent, input support, notes, and preferred safe area.
 - Device matrix for switching targets and reviewing compatibility scores.
+- Device Lab Report export with compatibility matrix, network speed estimates, lab manifest JSON, and tester runbook.
+- Web API Device Matrix Pack export with API usage scan, per-device risk notes, fallback guidance, CSV, and JSON.
+- User Guide & Onboarding Pack export with quick start docs, FAQ, support copy, onboarding QA, and JSON manifest.
+- Observability & Error Logging Pack export with health checks, error taxonomy, logging snippet, and release monitor runbook.
 - Rotate preview support.
 - Safe-area simulation for phone notches, feature-phone soft keys, and TV overscan.
 - Custom viewport override.
@@ -54,6 +59,9 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Privacy and Permissions inspector for camera, microphone, location, notifications, clipboard, storage, Bluetooth, USB, contacts, payments, credentials, sensors, downloads, sharing, and network calls.
 - Exportable privacy reports with permission evidence, recommendations, and manual review checklists.
 - Store Privacy Pack export with store disclosure drafts, permission rationale copy, reviewer test notes, and privacy questionnaire JSON.
+- Third-Party Inventory Pack export with external URL scanning, host inventory, review notes, CSV, and JSON.
+- Secrets Token Audit Pack export with API key, token, credential, and private-key scanning.
+- Storage & Data Retention Pack export with browser storage scan, retention questions, cleanup runbook, CSV, and JSON.
 - Launch Checklist Pack export that bundles deployment, compatibility, accessibility, privacy, store-review, generated app, and editable project materials for final QA.
 - Security Headers Pack export with Content Security Policy, Permissions-Policy, Netlify `_headers`, Cloudflare headers, Apache `.htaccess`, and nginx snippets.
 - SEO Share Pack export with title/description guidance, Open Graph and Twitter tags, robots.txt, sitemap.xml, and SoftwareApplication JSON-LD.
@@ -63,16 +71,31 @@ Web App Studio is a SwiftUI macOS app for building, testing, packaging, publishi
 - Beta Feedback Pack export with tester instructions, issue template, feedback triage CSV, JSON schema, and static HTML form.
 - Support Handoff Pack export with support guide, troubleshooting runbook, rollback plan, known-issues CSV, and support manifest JSON.
 - Release Notes Pack export with release notes, changelog, QA delta checklist, announcement copy, and version manifest JSON.
+- Release Evidence Vault export with score snapshot, sign-off CSV, evidence manifest, and bundled QA reports.
+- Content Policy & Age Rating Pack export with audience review, rating-sensitive term scan, store notes, CSV, and JSON.
 - Compliance Review Pack export with privacy, accessibility, storage, consent, policy, and store review checklists.
 - Maintenance Plan Pack export with maintenance calendar, browser drift checklist, backup checklist, and ownership manifest JSON.
 - Incident Response Pack export with incident plan, log CSV, status drafts, evidence checklist, and recovery manifest JSON.
 - Design System Pack export with brand tokens, design-tokens JSON, CSS variables, component checklist, and UI QA checklist.
 - Project Handoff Pack export with editable `.webappstudio` source, rebuild instructions, transfer checklist, project metadata, and import manifest.
 - Browser Compatibility Pack export with browser matrix CSV, lab script, JSON checklist, install checks, offline checks, and legacy target notes.
+- Web API Device Matrix Pack export with camera, location, storage, worker, sensor, payment, file, share, and hardware API review.
+- User Guide & Onboarding Pack export with first-run copy, troubleshooting notes, support template, and onboarding checklist.
+- Observability & Error Logging Pack export with runtime error handling, offline monitoring, health signals, CSV, and JSON.
 - Host Deployment Pack export with host matrix CSV, deploy checklist JSON, cache rules, and config snippets for common static hosts.
 - Installability Audit Pack export with manifest review CSV, install test script, JSON checklist, service worker checks, and installed-launch notes.
+- Offline Resilience Pack export with cache audit JSON, offline test matrix CSV, fallback copy, and recovery checklist.
 - QA Test Plan Pack export with QA runbook, test cases CSV, device matrix CSV, smoke script, and JSON checklist.
 - Rollback Snapshot Pack export with last known-good generated files, editable project source, restore checklist, cache purge notes, and snapshot manifest.
+- Release Dashboard with readiness, accessibility, privacy, performance, speed-test estimates, launch state, and release export shortcuts.
+- Device Lab Report Pack with per-device compatibility, speed estimates, CSV matrices, manifest JSON, and real-device sign-off checklist.
+- Launch Risk Radar Pack with cross-check risk scoring, triage priorities, CSV register, and JSON output.
+- Offline Resilience Pack with cache readiness checks, offline scenarios, fallback copy, and JSON audit output.
+- Release Evidence Vault with release proof, sign-off tracking, manifest JSON, and key QA reports.
+- Third-Party Inventory Pack with external script, API, CDN, media, and host review outputs.
+- Secrets Token Audit Pack with redacted findings, CSV/JSON evidence, and remediation guidance.
+- Content Policy & Age Rating Pack with audience fit checks, external-link review, and store-review notes.
+- Storage & Data Retention Pack with local data inventory, cache retention notes, and cleanup guidance.
 - Genius Mode with local-only project-aware suggestions that learn from marked-helpful actions over time.
 - Performance budget checker for generated file sizes.
 - Device compatibility scoring across built-in and custom profiles.

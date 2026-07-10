@@ -8,8 +8,9 @@ struct WebAppStudioApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(document)
-                .frame(minWidth: 1120, minHeight: 760)
+                .frame(minWidth: 1280, minHeight: 780)
         }
+        .defaultSize(width: 1360, height: 820)
         .windowStyle(.titleBar)
         .commands {
             CommandGroup(replacing: .newItem) {
